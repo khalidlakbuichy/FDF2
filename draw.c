@@ -29,8 +29,13 @@ void	my_mlx_pixel_put(t_img *img, long x, long y, int color)
 
 void	isometric(int *x, int *y, int z)
 {
-	*x = (*x - *y)* cos(0.8);
-	*y = (*x + *y) * sin(0.8) - z;
+	int previous_x;
+    int previous_y;
+
+    previous_x = *x;
+    previous_y = *y;
+    *x = (previous_x - previous_y) * cos(0.523599);
+    *y = -z + (previous_x + previous_y) * sin(0.523599);
 }
 
 
