@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/08 11:18:00 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/08 15:01:06 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ t_point	*fill_matrix(char *line)
 
 	i = 0;
 	splited_line = ft_split(line, ' ');
-	
-	z_line = (t_point *)malloc(sizeof(t_point) * get_width(splited_line) + 1);
+	z_line = (t_point *)malloc(sizeof(t_point) * (get_width(splited_line) + 1));
 	while (NULL != splited_line[i])
 	{
 		z_line[i].z = ft_atoi(splited_line[i]);
@@ -80,11 +79,11 @@ t_point	*fill_matrix(char *line)
 		}
 		else
 		{
-			// puts("alo");
 			if (z_line[i].z != 0)
 				z_line[i].color = 0x00d21f3c;
 			z_line[i].color = 0xffffffff;
 		}
+		printf("line[%d]: %d\n",i, z_line[i].z);
 		// printf("z: %ld\n", z_line[i].color);
 		// free(splited_line[i]);
 		i++;
@@ -98,7 +97,7 @@ t_point	*fill_matrix(char *line)
 	// 	j++;
 	// }
 	// free(splited_line);
-	// z_line[i] = 0;
+	// (z_line + i) = NULL;
 	free_mem(splited_line);
 	return (z_line);
 }
@@ -123,6 +122,7 @@ void	read_map(const char *filename, fdf *data)
 	i = 0;
 	while (NULL != line)
 	{
+		// printf("i: %d\n", i);
 		data->z_matrix[i] = fill_matrix(line);
 		free(line);
 		line = get_next_line(fd);
@@ -141,12 +141,16 @@ int	main(int ac, char **av)
 
 	unsigned x = 0;
 	unsigned y = 0;
+	printf("height: %d\n", data->heigth);
+	printf("width: %d\n", data->width);
 	while (y < data->heigth)
 	{
 		x = 0;
 		while (x < data->width)
 		{
-			printf("%3u,%u", data->z_matrix[y][x].z, data->z_matrix[y][x].color);
+			if (0 == x)
+				printf("%u", data->z_matrix[y][x].z);
+			printf("%3u", data->z_matrix[y][x].z);
 			x++;
 		}
 		puts("");
