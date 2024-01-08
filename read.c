@@ -6,19 +6,19 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/07 17:53:34 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/08 11:18:00 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-size_t	get_heigth(const char *file_name)
+size_t	get_heigth(const char *filename)
 {
 	ssize_t	fd;
 	size_t	heigth;
 	char	*line;
 
-	fd = open(file_name, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	heigth = 0;
 	line = get_next_line(fd);
 	while (NULL != line)
@@ -31,86 +31,127 @@ size_t	get_heigth(const char *file_name)
 	return (heigth);
 }
 
-ssize_t	get_width(char *line)
+ssize_t	get_width(char **splited_line)
 {
 	size_t	width;
-	char	**splited_line;
 
-	splited_line = ft_split(line, ' ');
 	width = 0;
 	while (NULL != splited_line[width])
-	{
-		free(splited_line[width]);
 		width++;
-	}
-	free(splited_line);
 	return (width);
 }
 
-void	fill_matrix(t_point *z_line, char *line)
+void	free_mem(char **memory)
+{
+	int	i;
+
+	i = 0;
+	if (NULL != memory)
+	{
+		while (NULL != memory[i])
+			free(memory[i++]);
+		free(memory);
+	}
+}
+
+t_point	*fill_matrix(char *line)
 {
 	int		i;
 	char	**splited_line;
 	char	**splited_values;
-	char	*comma;
+	t_point	*z_line;
 
 	i = 0;
 	splited_line = ft_split(line, ' ');
-	z_line = (t_point *)malloc(sizeof(t_point) * get_width(line) + 1);
+	
+	z_line = (t_point *)malloc(sizeof(t_point) * get_width(splited_line) + 1);
 	while (NULL != splited_line[i])
 	{
-        if (ft_strchr(splited_line[i], ','))
-        {
-            splited_values = ft_split(splited_line[i], ',');
-            z_line->z = ft_atoi(splited_values[0]);
-            z_line->color = ft_atoi_hex(splited_values[1]);
-            free(splited_values[0]);
-            free(splited_values[1]);
-            free(splited_values);
-        }
-        else
-        {
-            z_line->z = ft_atoi(splited_values[0]);
-            if (z_line->z !=0)
-                z_line->color = 0x00d21f3c;
-            z_line->color = 0xffffffff;
-        }
-		free(splited_line[i]);
+		z_line[i].z = ft_atoi(splited_line[i]);
+		// printf("z: %d\n", z_line[i].z);
+		if (NULL != ft_strchr(splited_line[i], ','))
+		{
+			splited_values = ft_split(splited_line[i], ',');
+			z_line[i].color = ft_atoi_hex(splited_values[1]);
+			// free(splited_values[0]);
+			// free(splited_values[1]);
+			// free(splited_values);
+			free_mem(splited_values);
+		}
+		else
+		{
+			// puts("alo");
+			if (z_line[i].z != 0)
+				z_line[i].color = 0x00d21f3c;
+			z_line[i].color = 0xffffffff;
+		}
+		// printf("z: %ld\n", z_line[i].color);
+		// free(splited_line[i]);
 		i++;
 	}
-	free(splited_line);
+	// int j = 0;
+	// while (j < i)
+	// {
+	// 	puts("helo");
+	// 	printf("z: %ld\n", z_line[j].color);
+	// 	printf("z: %ld\n", z_line[j].z);
+	// 	j++;
+	// }
+	// free(splited_line);
+	// z_line[i] = 0;
+	free_mem(splited_line);
+	return (z_line);
 }
 
-void	read_map(const char *file_name, fdf *data)
+void	read_map(const char *filename, fdf *data)
 {
-	int		fd;
+	ssize_t	fd;
 	int		i;
 	char	*line;
 
-	fd = open(file_name, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	if (-1 == fd)
+	{
+		perror("Can't open the file"); /* of course I need to make it better */
 		exit(1);
-	data->heigth = get_heigth(file_name);
+	}
+	data->heigth = get_heigth(filename);
+	// printf("height: %ld\n", data->heigth);
 	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));
 	line = get_next_line(fd);
+	data->width = get_width(ft_split(line, ' '));
 	i = 0;
 	while (NULL != line)
 	{
-		fill_matrix(data->z_matrix[i], line);
-	}
-	i = 0;
-	while (NULL != line)
-	{
-		fill_matrix(data->z_matrix[i], line);
+		data->z_matrix[i] = fill_matrix(line);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
-	close(fd);
 	data->z_matrix[i] = NULL;
+	close(fd);
 }
 
-int main (int ac, char **av)
+int	main(int ac, char **av)
 {
-    return (0);
+	if (ac != 2)
+		puts("ghayrha");
+	fdf *data = (fdf *)malloc(sizeof(fdf));
+	read_map(av[1], data);
+
+	unsigned x = 0;
+	unsigned y = 0;
+	while (y < data->heigth)
+	{
+		x = 0;
+		while (x < data->width)
+		{
+			printf("%3u,%u", data->z_matrix[y][x].z, data->z_matrix[y][x].color);
+			x++;
+		}
+		puts("");
+		y++;
+	}
+
+	return (0);
 }

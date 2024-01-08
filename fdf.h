@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/07 17:49:24 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/08 09:34:13 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "libs/minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <math.h>
+# include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -51,7 +52,7 @@ typedef struct s_fdf
 {
 	unsigned int	width;
 	unsigned int	heigth;
-	int				**z_matrix;
+	t_point			**z_matrix;
 	int				zoom;
 	int				color;
 	int				shift_x;
