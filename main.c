@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 09:25:53 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/10 10:09:12 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,23 @@ int main (int ac, char **av)
     data->mlx.win = mlx_new_window(data->mlx.mlx_ptr, WIDTH, HEIGHT, "my FDF");
     data->mlx.img.img_ptr = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
 	data->mlx.img.addr = mlx_get_data_addr(data->mlx.img.img_ptr, &data->mlx.img.bpp, &data->mlx.img.line_length, &data->mlx.img.endian);
-    data->zoom = 20;
+    data->zoom = 5;
     data->shift_x = 150;
     data->shift_y = 150;
+    // unsigned x;
+	// unsigned y;
+
+	// y = 0;
+	// while (y < data->heigth)
+	// {
+	// 	x = 0;
+	// 	while (x < data->width)
+	// 	{
+    //         printf("x: %i\ty: %i\t%i\n", x, y, data->z_matrix[y][x].z);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
     draw_map(data);
     mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win, data->mlx.img.img_ptr, 0, 0);
     mlx_key_hook(data->mlx.win, deal_key, data);
