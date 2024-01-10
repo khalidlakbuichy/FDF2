@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 10:48:59 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/10 15:34:17 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,25 @@ void	isometric(int *x, int *y, int z)
     *x = (previous_x - previous_y) * cos(0.523599);
     *y = -z + (previous_x + previous_y) * sin(0.523599);
 }
+void x_rotation(int *y, int *z, float *tita) {
+    int original_y = *y;
+    *y = original_y * cos(*tita) + *z * sin(*tita);
+    *z = -original_y * sin(*tita) + *z * cos(*tita);
+}
+
+void y_rotation(int *x, int *z, float *beta) {
+    int original_x = *x;
+    *x = original_x * cos(*beta) + *z * sin(*beta);
+    *z = -original_x * sin(*beta) + *z * cos(*beta);
+}
+
+void z_rotation(int *x, int *y, float *meta) {
+    int original_x = *x;
+    int original_y = *y;
+    *x = original_x * cos(*meta) - original_y * sin(*meta);
+    *y = original_x * sin(*meta) + original_y * cos(*meta);
+}
+
 
 
 void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1) 
@@ -60,7 +79,16 @@ void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1)
 	Y0 += data->shift_y;
 	Y1 += data->shift_y;
 
+	/* Rotation */
+	x_rotation(&Y0, &z, &data->tita);
+	x_rotation(&Y1, &z1, &data->tita);
 
+	y_rotation(&X0, &z, &data->beta);
+	y_rotation(&X1, &z1, &data->beta);
+
+	z_rotation(&X0, &Y0, &data->meta);
+	z_rotation(&X1, &Y1, &data->meta);
+	
     /* zoom */
     X0 *= data->zoom;
 	X1 *= data->zoom;

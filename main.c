@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 10:59:14 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/10 15:40:04 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,29 @@ int deal_key(int key, fdf *data)
     printf("%d\n", key);
     if (key == 65307)
         exit(0);
+    if (key == 117)
+    {
+        unsigned x;
+        unsigned y;
+        y = 0;
+        while (y < data->heigth)
+        {
+            x = 0;
+            while (x < data->width)
+            {
+                if (data->z_matrix[y][x].z != 0)
+                    data->z_matrix[y][x].z += 10;
+                x++;
+            }
+            y++;
+        }
+    }
+    if (key == 121)
+        data->beta += 0.25;
+    if (key == 122)
+        data->meta += 0.25;
+    if (key == 120)
+        data->tita += 0.25;
     if (key == 65451)
         data->zoom += 2;
     if (key == 65453)
@@ -57,21 +80,11 @@ int main (int ac, char **av)
     data->zoom = 1;
     data->shift_x = 0;
     data->shift_y = 0;
-    // unsigned x;
-	// unsigned y;
+    data->tita = 0;
+    data->meta = 0;
+    data->beta = 0;
 
-	// y = 0;
-	// while (y < data->heigth)
-	// {
-	// 	x = 0;
-	// 	while (x < data->width)
-	// 	{
-    //         printf("x: %i\ty: %i\t%i\n", x, y, data->z_matrix[y][x].z);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-    // draw_map(data);
+    draw_map(data);
     my_mlx_pixel_put(&data->mlx.img, 1000 + (WIDTH /2), 1000 + (HEIGHT /2), 0xffffffff);
     mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win, data->mlx.img.img_ptr, 0, 0);
     mlx_key_hook(data->mlx.win, deal_key, data);

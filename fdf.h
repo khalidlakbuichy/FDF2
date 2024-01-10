@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 09:02:19 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/10 15:29:22 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ typedef struct s_fdf
 	int				color;
 	int				shift_x;
 	int				shift_y;
-
+	float			tita;
+	float			beta;
+	float			meta;
 	t_mlx			mlx;
 }					fdf;
 
