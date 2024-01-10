@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/08 15:01:06 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/09 17:36:07 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_point	*fill_matrix(char *line)
 				z_line[i].color = 0x00d21f3c;
 			z_line[i].color = 0xffffffff;
 		}
-		printf("line[%d]: %d\n",i, z_line[i].z);
+		// printf("line[%d]: %d\n",i, z_line[i].z);
 		// printf("z: %ld\n", z_line[i].color);
 		// free(splited_line[i]);
 		i++;
@@ -130,32 +130,4 @@ void	read_map(const char *filename, fdf *data)
 	}
 	data->z_matrix[i] = NULL;
 	close(fd);
-}
-
-int	main(int ac, char **av)
-{
-	if (ac != 2)
-		puts("ghayrha");
-	fdf *data = (fdf *)malloc(sizeof(fdf));
-	read_map(av[1], data);
-
-	unsigned x = 0;
-	unsigned y = 0;
-	printf("height: %d\n", data->heigth);
-	printf("width: %d\n", data->width);
-	while (y < data->heigth)
-	{
-		x = 0;
-		while (x < data->width)
-		{
-			if (0 == x)
-				printf("%u", data->z_matrix[y][x].z);
-			printf("%3u", data->z_matrix[y][x].z);
-			x++;
-		}
-		puts("");
-		y++;
-	}
-
-	return (0);
 }

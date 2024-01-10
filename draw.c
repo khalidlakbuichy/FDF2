@@ -39,7 +39,7 @@ void	isometric(int *x, int *y, int z)
 }
 
 
-void DDA(fdf *data, t_img *img, int X0, int Y0, int X1, int Y1) 
+void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1) 
 {
     int dx;
     int dy; 
@@ -47,8 +47,10 @@ void DDA(fdf *data, t_img *img, int X0, int Y0, int X1, int Y1)
   	int		z;
 	int		z1;
 
-	z = data->z_matrix[Y0][X0];
-	z1 = data->z_matrix[Y1][X1];
+	printf("x: %d\t", X0);
+	printf("y: %d\n", Y0);
+	z = data->z_matrix[Y0][X0].z;
+	z1 = data->z_matrix[Y1][X1].z;
 
     /* zoom */
     X0 *= data->zoom;
@@ -60,8 +62,6 @@ void DDA(fdf *data, t_img *img, int X0, int Y0, int X1, int Y1)
 	isometric(&X0, &Y0, z);
 	isometric(&X1, &Y1, z1);
 
-    /* color */
-    data->color = (z || z1) ? 0xe80c0c : 0xffffffff;
 
     /* shifting */
     X0 += data->shift_x;
@@ -80,21 +80,21 @@ void DDA(fdf *data, t_img *img, int X0, int Y0, int X1, int Y1)
     // Put pixel for each step 
     float X = X0; 
     float Y = Y0;
-    printf("xinc: %f\n", Xinc);
-    printf("yinc: %f\n", Yinc);
-	printf("step: %d\n", steps);
+    // printf("xinc: %f\n", Xinc);
+    // printf("yinc: %f\n", Yinc);
+	// printf("step: %d\n", steps);
     for (int i = 0; i <= steps; i++) 
     {
-        my_mlx_pixel_put(img, (long) round(X), (long) round(Y), data->color);
+        my_mlx_pixel_put(&data->mlx.img, (long) round(X), (long) round(Y), color);
         X += Xinc; // increment in x at each step 
         Y += Yinc; // increment in y at each step 
     } 
 } 
 
-void	draw_map(fdf *data, t_img *img)
+void	draw_map(fdf *data)
 {
-	int x;
-	int y;
+	unsigned x;
+	unsigned y;
 
 	y = 0;
 	while (y < data->heigth)
@@ -103,9 +103,9 @@ void	draw_map(fdf *data, t_img *img)
 		while (x < data->width)
 		{
 			if (x < data->width - 1)
-				DDA(data, img, x, y, x + 1, y);
+				DDA(data, data->z_matrix[y][x].color, x, y, x + 1, y);
 			if (y < data->heigth - 1)
-				DDA(data, img, x, y, x, y + 1);
+				DDA(data, data->z_matrix[y][x].color, x, y, x , y + 1);
 			x++;
 		}
 		y++;
