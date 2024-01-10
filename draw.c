@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 10:20:22 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/10 10:48:59 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	create_trgb(int t, int r, int g, int b)
 void	my_mlx_pixel_put(t_img *img, long x, long y, int color)
 {
 	char	*dst;
+	if ((x >= WIDTH || x < 0) || (y >= HEIGHT || y < 0))
+		return ;
 	dst = img->addr + ABS((y * img->line_length + x * (img->bpp / 8)));
 	*(unsigned int *)dst = color;
 }
@@ -52,6 +54,13 @@ void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1)
 	z = data->z_matrix[Y0][X0].z;
 	z1 = data->z_matrix[Y1][X1].z;
 
+    /* shifting */
+    X0 += data->shift_x;
+	X1 += data->shift_x;
+	Y0 += data->shift_y;
+	Y1 += data->shift_y;
+
+
     /* zoom */
     X0 *= data->zoom;
 	X1 *= data->zoom;
@@ -61,13 +70,6 @@ void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1)
     /* adding 3D */
 	isometric(&X0, &Y0, z);
 	isometric(&X1, &Y1, z1);
-
-
-    /* shifting */
-    X0 += data->shift_x;
-	X1 += data->shift_x;
-	Y0 += data->shift_y;
-	Y1 += data->shift_y;
 
     // calculate steps required for generating pixels
     dx  = X1 - X0;

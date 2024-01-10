@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 10:09:12 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/10 10:59:14 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int deal_key(int key, fdf *data)
     if (key == 65307)
         exit(0);
     if (key == 65451)
-        data->zoom += 10;
+        data->zoom += 2;
     if (key == 65453)
-        data->zoom -= 10;
+        data->zoom -= 2;
     if (key == 65362)
         data->shift_y -= 10;
     if (key == 65364)
@@ -54,9 +54,9 @@ int main (int ac, char **av)
     data->mlx.win = mlx_new_window(data->mlx.mlx_ptr, WIDTH, HEIGHT, "my FDF");
     data->mlx.img.img_ptr = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
 	data->mlx.img.addr = mlx_get_data_addr(data->mlx.img.img_ptr, &data->mlx.img.bpp, &data->mlx.img.line_length, &data->mlx.img.endian);
-    data->zoom = 5;
-    data->shift_x = 150;
-    data->shift_y = 150;
+    data->zoom = 1;
+    data->shift_x = 0;
+    data->shift_y = 0;
     // unsigned x;
 	// unsigned y;
 
@@ -71,7 +71,8 @@ int main (int ac, char **av)
 	// 	}
 	// 	y++;
 	// }
-    draw_map(data);
+    // draw_map(data);
+    my_mlx_pixel_put(&data->mlx.img, 1000 + (WIDTH /2), 1000 + (HEIGHT /2), 0xffffffff);
     mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win, data->mlx.img.img_ptr, 0, 0);
     mlx_key_hook(data->mlx.win, deal_key, data);
     mlx_loop(data->mlx.mlx_ptr);
