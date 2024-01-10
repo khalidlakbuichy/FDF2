@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 15:34:17 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/10 15:48:50 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@ void	isometric(int *x, int *y, int z)
     *x = (previous_x - previous_y) * cos(0.523599);
     *y = -z + (previous_x + previous_y) * sin(0.523599);
 }
+
+void one_point_perspective(int *x, int *y, int z) {
+    int vanishing_point_x = WIDTH / 2;  // Adjust this value as needed
+    int vanishing_point_y = HEIGHT / 2; // Adjust this value as needed
+    float distance = 150; // Adjust this value for distance from the viewer
+
+    if (z != 0) {
+        *x = vanishing_point_x + ((*x - vanishing_point_x) * distance) / (distance + z);
+        *y = vanishing_point_y + ((*y - vanishing_point_y) * distance) / (distance + z);
+    }
+}
+
 void x_rotation(int *y, int *z, float *tita) {
     int original_y = *y;
     *y = original_y * cos(*tita) + *z * sin(*tita);
@@ -96,8 +108,8 @@ void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1)
 	Y1 *= data->zoom;
 
     /* adding 3D */
-	isometric(&X0, &Y0, z);
-	isometric(&X1, &Y1, z1);
+	// one_point_perspective(&X0, &Y0, z);
+	// one_point_perspective(&X1, &Y1, z1);
 
     // calculate steps required for generating pixels
     dx  = X1 - X0;
