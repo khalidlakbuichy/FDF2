@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 15:48:50 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:33:01 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,8 @@ void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1)
 	// printf("y: %d\n", Y0);
 	z = data->z_matrix[Y0][X0].z;
 	z1 = data->z_matrix[Y1][X1].z;
-
-    /* shifting */
-    X0 += data->shift_x;
-	X1 += data->shift_x;
-	Y0 += data->shift_y;
-	Y1 += data->shift_y;
-
+	
+	
 	/* Rotation */
 	x_rotation(&Y0, &z, &data->tita);
 	x_rotation(&Y1, &z1, &data->tita);
@@ -100,6 +95,11 @@ void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1)
 
 	z_rotation(&X0, &Y0, &data->meta);
 	z_rotation(&X1, &Y1, &data->meta);
+
+    /* adding 3D */
+	// one_point_perspective(&X0, &Y0, z);
+	// one_point_perspective(&X1, &Y1, z1);
+	
 	
     /* zoom */
     X0 *= data->zoom;
@@ -107,9 +107,15 @@ void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1)
 	Y0 *= data->zoom;
 	Y1 *= data->zoom;
 
-    /* adding 3D */
-	// one_point_perspective(&X0, &Y0, z);
-	// one_point_perspective(&X1, &Y1, z1);
+	isometric(&X0, &Y0, z);
+	isometric(&X1, &Y1, z1);
+	
+
+    /* shifting */
+    X0 += data->shift_x;
+	X1 += data->shift_x;
+	Y0 += data->shift_y;
+	Y1 += data->shift_y;
 
     // calculate steps required for generating pixels
     dx  = X1 - X0;
@@ -127,6 +133,8 @@ void DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1)
 	// printf("step: %d\n", steps);
     for (int i = 0; i <= steps; i++) 
     {
+		// if ((0 != z1 || 0 != z ) && 0xffffffff == color)
+		// 	color = 0x00D70040;
         my_mlx_pixel_put(&data->mlx.img, (long) round(X), (long) round(Y), color);
         X += Xinc; // increment in x at each step 
         Y += Yinc; // increment in y at each step 

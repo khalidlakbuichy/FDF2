@@ -6,7 +6,7 @@
 /*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 15:40:04 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:33:40 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ int deal_key(int key, fdf *data)
             }
             y++;
         }
+    }
+    if (key == 108)
+    {
+        unsigned x;
+        unsigned y;
+        y = 0;
+        while (y < data->heigth)
+        {
+            x = 0;
+            while (x < data->width)
+            {
+                if (data->z_matrix[y][x].z != 0)
+                    data->z_matrix[y][x].z -= 10;
+                x++;
+            }
+            y++;
+        } 
     }
     if (key == 121)
         data->beta += 0.25;
