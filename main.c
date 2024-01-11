@@ -6,11 +6,12 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/11 11:33:05 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:55:37 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "keys.h"
 
 int deal_key(int key, fdf *data)
 {
@@ -82,15 +83,14 @@ int main (int ac, char **av)
     data->mlx.win = mlx_new_window(data->mlx.mlx_ptr, WIDTH, HEIGHT, "my FDF");
     data->mlx.img.img_ptr = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
 	data->mlx.img.addr = mlx_get_data_addr(data->mlx.img.img_ptr, &data->mlx.img.bpp, &data->mlx.img.line_length, &data->mlx.img.endian);
-    data->zoom = 1.05;
-    data->shift_x = 0;
-    data->shift_y = 0;
+    data->zoom = 1;
+    data->shift_x = WIDTH / 2;
+    data->shift_y = HEIGHT / 2;
     data->tita = 0;
     data->meta = 0;
     data->beta = 0;
     
     draw_map(data);
-    my_mlx_pixel_put(&data->mlx.img, 1000 + (WIDTH /2), 1000 + (HEIGHT /2), 0xffffffff);
     mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win, data->mlx.img.img_ptr, 0, 0);
     mlx_key_hook(data->mlx.win, deal_key, data);
     mlx_loop(data->mlx.mlx_ptr);

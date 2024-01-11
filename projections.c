@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 09:00:59 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/11 09:01:35 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:48:07 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	one_point_perspective(int *x, int *y, int z)
 	// Adjust this value for distance from the viewer
 	if (z != 0)
 	{
-		*x = vanishing_point_x + ((*x - vanishing_point_x) * distance) / (distance + z);
-		*y = vanishing_point_y + ((*y - vanishing_point_y) * distance) / (distance + z);
+		*x = vanishing_point_x + ((*x - vanishing_point_x) * distance)
+			/ (distance + z);
+		*y = vanishing_point_y + ((*y - vanishing_point_y) * distance)
+			/ (distance + z);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_hex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
+/*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 09:51:51 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/07 17:44:42 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:47:10 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	hex_to_int(char nb, const char *hex_base)
 
 long int	ft_atoi_hex(const char *hex)
 {
-	int i;
-	int tmp;
-	long int hex_nbr;
-	const char *hex_base;
+	int			i;
+	int			tmp;
+	long int	hex_nbr;
+	const char	*hex_base;
 
 	if (NULL == ft_strnstr(hex, "0x", 2))
 		return (-1);

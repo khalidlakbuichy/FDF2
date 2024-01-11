@@ -6,11 +6,12 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/11 11:34:38 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/11 12:03:39 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "keys.h"
 
 void	zoom_in_out(fdf *data, int key)
 {
