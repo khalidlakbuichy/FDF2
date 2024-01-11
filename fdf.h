@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/11 09:27:34 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:57:10 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-
-# define MAX(a, b) (a > b ? a : b)
-# define ABS(a) (a < 0 ? -a : a)
 
 typedef struct s_img
 {
@@ -57,6 +54,8 @@ typedef struct s_line
 	int				x1;
 	int				y;
 	int				y1;
+	int				z;
+	int				z1;
 	unsigned int	color;
 }					t_line;
 
@@ -74,10 +73,21 @@ typedef struct s_fdf
 	t_mlx			mlx;
 }					fdf;
 
+typedef struct s_dda
+{
+	int				dx;
+	int				dy;
+	int				steps;
+	float			xinc;
+	float			yinc;
+	float			x;
+	float			y;
+}					t_dda;
+
 char				*get_next_line(int fd);
 void				read_map(const char *filename, fdf *data);
 // void				draw_line(fdf *data, float x, float y, float x1, float y1);
-void				my_mlx_pixel_put(t_img *img, long x, long y, int color);
+void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void				draw_map(fdf *data);
 void				draw_line(fdf *data, t_line line);
 void				x_rotation(int *y, int *z, float *tita);
@@ -85,6 +95,7 @@ void				y_rotation(int *x, int *z, float *beta);
 void				z_rotation(int *x, int *y, float *meta);
 void				one_point_perspective(int *x, int *y, int z);
 void				isometric(int *x, int *y, int z);
+int					ft_max(int a, int b);
 
 long int			ft_atoi_hex(const char *hex);
 #endif

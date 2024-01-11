@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/11 08:52:19 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:36:30 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int main (int ac, char **av)
     
     if (ac != 2)
     {
-        return (1);
-        // error
+        perror("enter enter only one parametr to the progtam !");
+        return (EXIT_FAILURE);
     }
     data = (fdf *)malloc(sizeof(fdf));
     read_map(av[1], data);
