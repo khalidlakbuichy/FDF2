@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
+/*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 15:29:22 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/11 09:05:18 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,12 @@ void				read_map(const char *filename, fdf *data);
 void				draw_line(fdf *data, float x, float y, float x1, float y1);
 void				my_mlx_pixel_put(t_img *img, long x, long y, int color);
 void				draw_map(fdf *data);
-void				DDA(fdf *data, unsigned int color, int X0, int Y0, int X1,
-						int Y1);
+void				DDA(fdf *data, unsigned int color, int X0, int Y0, int X1, int Y1);
+void				x_rotation(int *y, int *z, float *tita);
+void				y_rotation(int *x, int *z, float *beta);
+void				z_rotation(int *x, int *y, float *meta);
+void				one_point_perspective(int *x, int *y, int z);
+void				isometric(int *x, int *y, int z);
+
 long int			ft_atoi_hex(const char *hex);
 #endif

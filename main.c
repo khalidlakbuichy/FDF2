@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
+/*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/10 17:33:40 by khalid           ###   ########.fr       */
+/*   Updated: 2024/01/11 08:52:19 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int deal_key(int key, fdf *data)
         data->meta += 0.25;
     if (key == 120)
         data->tita += 0.25;
-    if (key == 65451)
+    if (key == 112)
         data->zoom += 2;
-    if (key == 65453)
+    if (key == 109)
         data->zoom -= 2;
     if (key == 65362)
         data->shift_y -= 10;
