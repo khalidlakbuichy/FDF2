@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/11 10:57:10 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:27:43 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ typedef struct s_dda
 
 char				*get_next_line(int fd);
 void				read_map(const char *filename, fdf *data);
-// void				draw_line(fdf *data, float x, float y, float x1, float y1);
 void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void				draw_map(fdf *data);
 void				draw_line(fdf *data, t_line line);
@@ -96,6 +95,12 @@ void				z_rotation(int *x, int *y, float *meta);
 void				one_point_perspective(int *x, int *y, int z);
 void				isometric(int *x, int *y, int z);
 int					ft_max(int a, int b);
-
+void				ft_rotation(fdf *data, t_line *line);
+void				ft_zoom(fdf *data, t_line *line);
+void				ft_isometric(t_line *line);
+void				ft_transalation(fdf *data, t_line *line);
+void				rotation_x_y_z(fdf *data, int key);
+void				shift_x_y(fdf *data, int key);
+void				rotation_x_y_z(fdf *data, int key);
 long int			ft_atoi_hex(const char *hex);
 #endif
