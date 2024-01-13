@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/11 11:27:43 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 10:07:44 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,5 @@ void				rotation_x_y_z(fdf *data, int key);
 void				shift_x_y(fdf *data, int key);
 void				rotation_x_y_z(fdf *data, int key);
 long int			ft_atoi_hex(const char *hex);
+int					deal_key(int key, fdf *data);
 #endif

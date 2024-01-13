@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:55:15 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/11 14:46:12 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 10:16:40 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@
 # define KEY_ARR_UP 65362
 # define KEY_ARR_DOWN 65364
 # define KEY_ARR_RIGHT 65363
-# define KEY_LARR_EFT 65361
+# define KEY_ARR_LEFT 65361
+
+// Other importatnt keys
+# define KEY_ESC 65307
+# define KEY_ENTER 65293
+# define KEY_SPACE 32
+# define KEY_PLUS 65451
+# define KEY_MINUS 65453
 
 // Function keys
 # define KEY_F1 65470
@@ -88,10 +95,5 @@
 # define KEY_LX 120
 # define KEY_LY 121
 # define KEY_LZ 122
-
-// Other keys
-# define KEY_ESC 65307
-# define KEY_ENTER 65293
-# define KEY_SPACE 32
 
 #endif
