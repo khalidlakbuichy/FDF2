@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/13 18:21:59 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:37:50 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	draw_line(fdf *data, t_line line)
 	ft_rotation(data, &line);
 	ft_zoom(data, &line);
 	ft_isometric(&line);
-	
 	ft_transalation(data, &line);
 	dda.dx = line.x1 - line.x;
 	dda.dy = line.y1 - line.y;

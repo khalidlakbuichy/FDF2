@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/13 18:17:11 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:36:58 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,7 @@ int					deal_mouse(int button, int x, int y, fdf *data);
 void				ft_render(fdf *data);
 void				ft_init_data(fdf *data);
 void				center_object(fdf *data);
+void				ft_one_point_perspective(t_line *line);
+void				isometric_centering(fdf *data);
 
 #endif
