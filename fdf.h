@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/13 10:07:44 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 12:20:41 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_fdf
 	unsigned int	width;
 	unsigned int	heigth;
 	t_point			**z_matrix;
-	int				zoom;
+	double				zoom;
 	int				shift_x;
 	int				shift_y;
 	float			tita;
@@ -104,4 +104,9 @@ void				shift_x_y(fdf *data, int key);
 void				rotation_x_y_z(fdf *data, int key);
 long int			ft_atoi_hex(const char *hex);
 int					deal_key(int key, fdf *data);
+void				upper_lower_z(fdf *data, int key);
+void				zoom_in_out(fdf *data, int key);
+void				ft_init(fdf *data);
+int					deal_mouse(int button, int x, int y, fdf *data);
+void				ft_render(fdf *data);
 #endif

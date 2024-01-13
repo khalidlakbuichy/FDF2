@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 10:23:10 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:04:04 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	zoom_in_out(fdf *data, int key)
 {
-	if (key == 112)
-		data->zoom *= exp(0.02);
-	if (key == 109)
+	if (KEY_PLUS == key || KEY_LM == key)
+		data->zoom *= 0.25;
+	if (KEY_MINUS == key)
 		data->zoom *= exp(-0.02);
 }
 
@@ -43,29 +43,35 @@ void	rotation_x_y_z(fdf *data, int key)
 		data->tita += 0.25;
 }
 
-void upper_lower_z(fdf *data, int key)
+void	upper_lower_z(fdf *data, int key)
 {
 	unsigned	x;
 	unsigned	y;
+	unsigned	z;
 
-	if (KEY_LU == 117)
+	if (KEY_LU == key)
 	{
 		y = -1;
 		while (++y < data->heigth)
 		{
 			x = -1;
 			while (++x < data->width)
-				data->z_matrix[y][x].z *= 1.25;
+			{
+				z = data->z_matrix[y][x].z;
+				printf("z: %u\n", z);
+				if (z <= 65536)
+					z *= 1.25;
+			}
 		}
 	}
-	if (KEY_LP == 117)
+	if (KEY_LL == key)
 	{
 		y = -1;
 		while (++y < data->heigth)
 		{
 			x = -1;
 			while (++x < data->width)
-				data->z_matrix[y][x].z *= (-1.25);
+				z /= 1.25;
 		}
 	}
 }

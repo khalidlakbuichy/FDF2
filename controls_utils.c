@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:07:09 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 10:24:30 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:14:24 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 
 int	deal_key(int key, fdf *data)
 {
-	unsigned	x;
-	unsigned	y;
-	unsigned	x;
-	unsigned	y;
-
 	printf("%d\n", key);
 	if (key == 65307)
 		exit(0);
@@ -27,18 +22,11 @@ int	deal_key(int key, fdf *data)
 		upper_lower_z(data, key);
 	if (KEY_LX == key || KEY_LY == key || KEY_LZ == key)
 		rotation_x_y_z(data, key);
-	if (KEY_PLUS == key || KEY_MINUS == key)
+	if (KEY_PLUS == key || KEY_MINUS == key || KEY_LM == key)
 		zoom_in_out(data, key);
 	if (KEY_ARR_UP == key || KEY_ARR_DOWN == key || KEY_ARR_RIGHT == key
 		|| KEY_ARR_LEFT == key)
 		shift_x_y(data, key);
-	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img.img_ptr);
-	data->mlx.img.img_ptr = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
-	data->mlx.img.addr = mlx_get_data_addr(data->mlx.img.img_ptr,
-			&data->mlx.img.bpp, &data->mlx.img.line_length,
-			&data->mlx.img.endian);
-	draw_map(data);
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win,
-		data->mlx.img.img_ptr, 0, 0);
+	ft_render(data);
 	return (0);
 }
