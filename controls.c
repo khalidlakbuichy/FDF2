@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 13:04:04 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:45:04 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,16 @@ void	rotation_x_y_z(fdf *data, int key)
 		data->tita += 0.25;
 }
 
+void	center_object(fdf *data)
+{
+	data->shift_x = (WIDTH / 2) - (data->width / 2);
+	data->shift_y = (HEIGHT / 2) - (data->heigth / 2);
+}
+
 void	upper_lower_z(fdf *data, int key)
 {
 	unsigned	x;
 	unsigned	y;
-	unsigned	z;
 
 	if (KEY_LU == key)
 	{
@@ -56,12 +61,8 @@ void	upper_lower_z(fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-			{
-				z = data->z_matrix[y][x].z;
-				printf("z: %u\n", z);
-				if (z <= 65536)
-					z *= 1.25;
-			}
+				if (data->z_matrix[y][x].z <= 65536)
+					data->z_matrix[y][x].z *= 1.25;
 		}
 	}
 	if (KEY_LL == key)
@@ -71,7 +72,8 @@ void	upper_lower_z(fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-				z /= 1.25;
+				if (data->z_matrix[y][x].z <= 65536)
+					data->z_matrix[y][x].z /= 1.25;
 		}
 	}
 }

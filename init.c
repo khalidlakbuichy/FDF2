@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 12:56:15 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:41:11 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,17 @@ void	ft_render(fdf *data)
 	draw_map(data);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win,
 		data->mlx.img.img_ptr, 0, 0);
-    print_menu(data);
+	print_menu(data);
+}
+
+void	ft_init_data(fdf *data)
+{
+	data->zoom = 10;
+	data->shift_x = (WIDTH / 2) - (data->width / 2);
+	data->shift_y = (HEIGHT / 2) - (data->heigth / 2);
+	data->tita = 0;
+	data->meta = 0;
+	data->beta = 0;
 }
 
 void	ft_init(fdf *data)
@@ -57,10 +67,5 @@ void	ft_init(fdf *data)
 	data->mlx.img.addr = mlx_get_data_addr(data->mlx.img.img_ptr,
 			&data->mlx.img.bpp, &data->mlx.img.line_length,
 			&data->mlx.img.endian);
-	data->zoom = 15;
-	data->shift_x = (WIDTH / 2) - (19 / 2);
-	data->shift_y = (HEIGHT / 2) - (11 / 2);
-	data->tita = 0;
-	data->meta = 0;
-	data->beta = 0;
+	ft_init_data(data);
 }

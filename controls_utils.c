@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:07:09 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 11:14:24 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:44:41 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	deal_key(int key, fdf *data)
 	if (KEY_ARR_UP == key || KEY_ARR_DOWN == key || KEY_ARR_RIGHT == key
 		|| KEY_ARR_LEFT == key)
 		shift_x_y(data, key);
+	if (KEY_LR == key)
+		ft_init_data(data);
+	if (KEY_LC == key)
+		center_object(data);
 	ft_render(data);
 	return (0);
 }
