@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 14:41:11 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:17:57 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@ void	print_menu(fdf *data)
 	y = 0;
 	mlx = data->mlx.mlx_ptr;
 	win = data->mlx.win;
-	mlx_string_put(mlx, win, 65, y += 20, 0xffffffff, "How to Use");
-	mlx_string_put(mlx, win, 15, y += 35, 0xffffffff, "Zoom: Scroll or +/-");
-	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Move: Arrows");
-	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Flatten: </>");
-	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Rotate: Press & Move");
+	mlx_string_put(mlx, win, 65, y += 20, 0xffffffff, "How to Use ?");
+	mlx_string_put(mlx, win, 15, y += 35, 0xffffffff, "Zoom:");
+	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "Scroll or +/-");
+	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Move:");
+	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "Arrows key");
 	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Rotate:");
-	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "X-Axis - 2/8");
-	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "Y-Axis - 4/6");
-	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "Z-Axis - 1(3)/7(9)");
+	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "x: for X-Axis");
+	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "y: for Y-Axis");
+	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "z: fro Z-Axis");
 	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Projection");
-	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "ISO: I Key");
-	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "Parallel: P Key");
+	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "Isometric: i key");
+	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "one point view: o Key");
+	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Reset: r Key");
 }
 
 void	ft_render(fdf *data)
@@ -48,11 +49,28 @@ void	ft_render(fdf *data)
 	print_menu(data);
 }
 
+void	isometric_centering(fdf *data)
+{
+	int	center_x;
+	int	center_y;
+
+	// Calculate the center of the object in the isometrically transformed space
+	center_x = data->width / 2;
+	center_y = data->heigth / 2;
+	int center_z = 0; // Assuming the object is centered along the z-axis
+	// Apply isometric projection to the center
+	isometric(&center_x, &center_y, center_z);
+	// Calculate the centering shift values
+	data->shift_x = (WIDTH - center_x) / 2;
+	data->shift_y = (HEIGHT - center_y) / 2;
+}
+
 void	ft_init_data(fdf *data)
 {
-	data->zoom = 10;
-	data->shift_x = (WIDTH / 2) - (data->width / 2);
-	data->shift_y = (HEIGHT / 2) - (data->heigth / 2);
+	data->zoom = 1;
+	isometric_centering(data);
+    data->shift_x = (WIDTH - data->width) / 2;
+	data->shift_y = (HEIGHT - data->heigth) / 2;
 	data->tita = 0;
 	data->meta = 0;
 	data->beta = 0;

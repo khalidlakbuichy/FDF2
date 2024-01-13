@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/13 14:45:55 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:17:11 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define CAVALIER_ANGLE 0.785398
 
 # include "libs/libft/libft.h"
 # include "libs/minilibx-linux/mlx.h"

@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 09:00:59 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/11 14:48:07 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:20:27 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ void	isometric(int *x, int *y, int z)
 
 void	one_point_perspective(int *x, int *y, int z)
 {
-	int vanishing_point_x = WIDTH / 2;  // Adjust this value as needed
-	int vanishing_point_y = HEIGHT / 2; // Adjust this value as needed
-	float distance = 150;
-	// Adjust this value for distance from the viewer
+	int		van_point_x;
+	int		van_point_y;
+	float	distance;
+
+	van_point_x = (WIDTH / 2);
+	van_point_y = (HEIGHT / 2);
+	distance = 150;
 	if (z != 0)
 	{
-		*x = vanishing_point_x + ((*x - vanishing_point_x) * distance)
-			/ (distance + z);
-		*y = vanishing_point_y + ((*y - vanishing_point_y) * distance)
-			/ (distance + z);
+		*x = van_point_x + ((*x - van_point_x) * distance) / (distance + z);
+		*y = van_point_y + ((*y - van_point_y) * distance) / (distance + z);
 	}
 }

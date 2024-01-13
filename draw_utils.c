@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 08:55:37 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 12:17:57 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:23:36 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ void	ft_isometric(t_line *line)
 {
 	isometric(&line->x, &line->y, line->z);
 	isometric(&line->x1, &line->y1, line->z1);
+}
+
+void ft_one_point_perspective(t_line *line)
+{
+	one_point_perspective(&line->x, &line->y, line->z);
+	one_point_perspective(&line->x1, &line->y1, line->z1);
 }
 
 void	ft_transalation(fdf *data, t_line *line)
