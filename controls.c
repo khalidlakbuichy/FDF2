@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 14:45:04 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 11:15:08 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,27 @@
 void	zoom_in_out(fdf *data, int key)
 {
 	if (KEY_PLUS == key || KEY_LM == key)
-		data->zoom *= 0.25;
+	{
+		data->zoom *= exp(0.02);
+		isometric_centering(data);
+	}
 	if (KEY_MINUS == key)
+	{
 		data->zoom *= exp(-0.02);
+		isometric_centering(data);
+	}
 }
 
 void	shift_x_y(fdf *data, int key)
 {
 	if (key == 65362)
-		data->shift_y -= 10;
+		data->shift_y -= 20;
 	if (key == 65364)
-		data->shift_y += 10;
+		data->shift_y += 20;
 	if (key == 65363)
-		data->shift_x += 10;
+		data->shift_x += 20;
 	if (key == 65361)
-		data->shift_x -= 10;
+		data->shift_x -= 20;
 }
 
 void	rotation_x_y_z(fdf *data, int key)
@@ -41,12 +47,6 @@ void	rotation_x_y_z(fdf *data, int key)
 		data->meta += 0.25;
 	if (key == 120)
 		data->tita += 0.25;
-}
-
-void	center_object(fdf *data)
-{
-	data->shift_x = (WIDTH / 2) - (data->width / 2);
-	data->shift_y = (HEIGHT / 2) - (data->heigth / 2);
 }
 
 void	upper_lower_z(fdf *data, int key)

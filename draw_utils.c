@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 08:55:37 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/14 08:42:12 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 11:21:27 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,21 @@
 
 void	ft_rotation(fdf *data, t_line *line)
 {
+
+
+	isometric_centering(data);
+	// Perform the rotation
 	x_rotation(&line->y, &line->z, &data->tita);
 	x_rotation(&line->y1, &line->z1, &data->tita);
 	y_rotation(&line->x, &line->z, &data->beta);
 	y_rotation(&line->x1, &line->z1, &data->beta);
 	z_rotation(&line->x, &line->y, &data->meta);
 	z_rotation(&line->x1, &line->y1, &data->meta);
+	// Translate the object back to its original position
+	// line->x += center_x;
+	// line->y += center_y;
+	// line->x1 += center_x;
+	// line->y1 += center_y;
 }
 
 void	ft_zoom(fdf *data, t_line *line)
