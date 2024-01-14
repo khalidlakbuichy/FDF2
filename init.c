@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 19:27:35 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 08:43:34 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,25 @@ void	ft_render(fdf *data)
 	print_menu(data);
 }
 
+void	isometric_centering(fdf *data)
+{
+	int	center_x;
+	int	center_y;
+
+	// Calculate the center of the object in the isometrically transformed space
+	center_x = data->width / 2;
+	center_y = data->heigth / 2;
+	int center_z = 0; // Assuming the object is centered along the z-axis
+	isometric(&center_x, &center_y, center_z);
+	// Calculate the centering shift values
+	data->shift_x = (WIDTH - center_x * 2) / 2;
+	data->shift_y = (HEIGHT - center_y * 2) / 2;
+}
+
 void	ft_init_data(fdf *data)
 {
 	data->zoom = 1;
 	isometric_centering(data);
-    data->shift_x = (WIDTH - data->width) / 2;
-	data->shift_y = (HEIGHT - data->heigth) / 2;
 	data->tita = 0;
 	data->meta = 0;
 	data->beta = 0;
