@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/14 11:06:40 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:52:03 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,18 @@ typedef struct s_line
 	unsigned int	color;
 }					t_line;
 
+typedef enum
+{
+	ISO,
+	PARALLEL
+}					projection;
+
 typedef struct s_fdf
 {
 	unsigned int	width;
 	unsigned int	heigth;
 	t_point			**z_matrix;
+	projection		view;
 	double			zoom;
 	int				shift_x;
 	int				shift_y;
@@ -114,5 +121,7 @@ void				ft_init_data(fdf *data);
 void				center_object(fdf *data);
 void				ft_one_point_perspective(t_line *line);
 void				isometric_centering(fdf *data);
+void				cabinet(int *x, int *y, int z);
+void				ft_cabinet(t_line *line);
 
 #endif

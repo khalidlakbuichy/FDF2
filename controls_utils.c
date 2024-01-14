@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:07:09 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/14 11:06:59 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:56:54 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	deal_key(int key, fdf *data)
 		ft_init_data(data);
 	if (KEY_LC == key)
 		isometric_centering(data);
+	if (KEY_LT == key)
+		data->view = PARALLEL;
 	ft_render(data);
 	return (0);
 }

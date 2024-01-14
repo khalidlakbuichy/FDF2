@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/14 10:53:11 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:16:16 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,16 @@ void	draw_line(fdf *data, t_line line)
 
 	line.z = data->z_matrix[line.y][line.x].z;
 	line.z1 = data->z_matrix[line.y1][line.x1].z;
-	ft_rotation(data, &line);
 	ft_zoom(data, &line);
+	ft_rotation(data, &line);
+	if (ISO == data->view)
 	ft_isometric(&line);
+	else
+	{
+		data->tita = -1.5708;
+		data->beta = 0;
+		data->meta = 0;
+	}
 	ft_transalation(data, &line);
 	dda.dx = line.x1 - line.x;
 	dda.dy = line.y1 - line.y;
@@ -40,14 +47,13 @@ void	draw_line(fdf *data, t_line line)
 	dda.yinc = (line.y1 - line.y) / (float)dda.steps;
 	dda.x = line.x;
 	dda.y = line.y;
-	i = 0;
-	while (i <= dda.steps)
+	i = -1;
+	while (++i <= dda.steps)
 	{
 		my_mlx_pixel_put(&data->mlx.img, round(dda.x), round(dda.y),
 			line.color);
 		dda.x += dda.xinc;
 		dda.y += dda.yinc;
-		i++;
 	}
 }
 

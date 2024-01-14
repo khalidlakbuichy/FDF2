@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/13 19:28:38 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 14:54:51 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av)
 	draw_map(data);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win,
 		data->mlx.img.img_ptr, 0, 0);
+	print_menu(data);
 	mlx_key_hook(data->mlx.win, deal_key, data);
 	mlx_mouse_hook(data->mlx.win, deal_mouse, data);
 	mlx_hook(data->mlx.win, 17, 0, ft_close, data);

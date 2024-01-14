@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/14 11:04:54 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:55:51 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ void	isometric_centering(fdf *data)
 
 void	ft_init_data(fdf *data)
 {
-	data->zoom = 50;
+	if (data->width < 20)
+		data->zoom = 30;
+	else
+		data->zoom = 1;
+	data->view = ISO;
 	isometric_centering(data);
 	data->tita = 0;
 	data->meta = 0;
