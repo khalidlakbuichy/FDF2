@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/14 08:25:22 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 09:01:24 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	draw_map(fdf *data)
 {
 	t_line	line;
 
-	line.y = 0;
-	while (line.y < data->heigth)
+	line.y = -1;
+	while (++line.y < data->heigth)
 	{
-		line.x = 0;
-		while (line.x < data->width)
+		line.x = -1;
+		while (++line.x < data->width)
 		{
 			line.x1 = line.x;
 			line.y1 = line.y;
@@ -75,8 +75,6 @@ void	draw_map(fdf *data)
 				line.y1++;
 				draw_line(data, line);
 			}
-			line.x++;
 		}
-		line.y++;
 	}
 }

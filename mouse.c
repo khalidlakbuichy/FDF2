@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 11:01:06 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 20:46:24 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/14 09:02:46 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ float	lerp(float a, float b, float t)
 
 int	deal_mouse(int button, int x, int y, fdf *data)
 {
-	float interpolationFactor = 0.5;
+	float	interpolationFactor;
 
+	interpolationFactor = 0.5;
 	if (button == 4)
 		data->zoom = lerp(data->zoom, data->zoom * 1.1, interpolationFactor);
 	else if (button == 5)
