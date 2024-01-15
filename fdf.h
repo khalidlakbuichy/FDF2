@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/14 17:52:03 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 08:34:44 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define CAVALIER_ANGLE 0.785398
 
 # include "libs/libft/libft.h"
 # include "libs/minilibx-linux/mlx.h"
@@ -123,5 +122,6 @@ void				ft_one_point_perspective(t_line *line);
 void				isometric_centering(fdf *data);
 void				cabinet(int *x, int *y, int z);
 void				ft_cabinet(t_line *line);
+void				ft_parallel(fdf *data, t_line *line);
 
 #endif
