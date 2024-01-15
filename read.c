@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/14 18:47:06 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:08:14 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,22 @@ t_point	*fill_matrix(char *line)
 		if (NULL != ft_strchr(splited_line[i], ','))
 		{
 			splited_values = ft_split(splited_line[i], ',');
+			if (!ft_isnbr(splited_values[0]))
+			{
+				perror("Wrong file format !!");
+				exit(EXIT_FAILURE);
+			}
 			z_line[i].color = ft_atoi_hex(splited_values[1]);
 			free_mem(splited_values);
 		}
 		else
 		{
+			if (!ft_isnbr(splited_line[i]))
+			{
+				printf("this is the error |%s|\n", splited_line[i]);
+				perror("Wrong file format !!");
+				exit(EXIT_FAILURE);
+			}
 			if (z_line[i].z != 0)
 				z_line[i].color = 0x00d21f3c;
 			else

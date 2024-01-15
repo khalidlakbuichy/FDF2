@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   ft_isnbr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 11:01:06 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/15 09:29:22 by klakbuic         ###   ########.fr       */
+/*   Created: 2024/01/15 09:45:33 by klakbuic          #+#    #+#             */
+/*   Updated: 2024/01/15 10:11:10 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-float	lerp(float a, float b, float t)
+static int	is_white(int c)
 {
-	return (a + t * (b - a));
+	if (c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == '\v'
+		|| c == '\f')
+		return (1);
+	return (0);
 }
 
-int	deal_mouse(int button, int x, int y, fdf *data)
+int	ft_isnbr(const char *str)
 {
-	float	interpolationFactor;
+	int	i;
 
-	interpolationFactor = 0.5;
-	if (button == 4)
+	i = 0;
+	while (is_white(str[i]) && 0 != str[i])
+		i++;
+	if ('-' == str[i])
+		i++;
+	while (0 != str[i])
 	{
-		data->zoom = lerp(data->zoom, data->zoom * 1.1, interpolationFactor);
-		ft_centering(data);
+		if (!ft_isdigit(str[i]))
+			return (0);
+		if (is_white(str[i]))
+			break ;
+		i++;
 	}
-	else if (button == 5)
-	{
-		data->zoom = lerp(data->zoom, data->zoom / 1.1, interpolationFactor);
-		ft_centering(data);
-	}
-	ft_render(data);
-	return (0);
+	return (1);
 }

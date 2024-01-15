@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/15 09:19:38 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:29:08 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	zoom_in_out(fdf *data, int key)
 	if (KEY_PLUS == key || KEY_LM == key)
 	{
 		data->zoom *= exp(0.02);
-		isometric_centering(data);
+		ft_centering(data);
 	}
 	if (KEY_MINUS == key)
 	{
 		data->zoom *= exp(-0.02);
-		isometric_centering(data);
+		ft_centering(data);
 	}
 }
 

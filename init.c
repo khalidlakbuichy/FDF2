@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/14 17:55:51 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:27:39 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ void	ft_render(fdf *data)
 	print_menu(data);
 }
 
-void	isometric_centering(fdf *data)
-{
-	int	center_x;
-	int	center_y;
-	int	center_z;
+// void	isometric_centering(fdf *data)
+// {
+// 	int	center_x;
+// 	int	center_y;
+// 	int	center_z;
 
-	center_x = (data->width * data->zoom) / 2;
-	center_y = (data->heigth * data->zoom)  / 2;
-	center_z = 0;
-	isometric(&center_x, &center_y, center_z);
-	data->shift_x = (WIDTH / 2) - center_x;
-	data->shift_y = (HEIGHT / 2)- center_y;
-}
+// 	center_x = (data->width * data->zoom) / 2;
+// 	center_y = (data->heigth * data->zoom)  / 2;
+// 	center_z = 0;
+// 	isometric(&center_x, &center_y, center_z);
+// 	data->shift_x = (WIDTH / 2) - center_x;
+// 	data->shift_y = (HEIGHT / 2)- center_y;
+// }
 
 void	ft_init_data(fdf *data)
 {
@@ -70,7 +70,7 @@ void	ft_init_data(fdf *data)
 	else
 		data->zoom = 1;
 	data->view = ISO;
-	isometric_centering(data);
+	ft_centering(data);
 	data->tita = 0;
 	data->meta = 0;
 	data->beta = 0;
