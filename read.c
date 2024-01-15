@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 15:32:47 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:38:11 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	set_width_height(fdf *data, const char *filename)
 	close(fd);
 }
 
-void free_matrix(t_point **z_matrix, int heigth)
+void	free_matrix(t_point **z_matrix, int heigth)
 {
 	if (NULL != z_matrix)
 	{
-		while (heigth -- >= 0)
+		while (heigth-- >= 0)
 			free(z_matrix[heigth]);
 	}
 	free(z_matrix);
@@ -86,8 +86,13 @@ int	fill_matrix(t_point *z_line, char *line)
 				return (-1);
 			}
 			z_line[i].color = ft_atoi_hex(splited_values[1]);
-			if (!ft_isnbr(splited_values[0]))
+			printf("narii: %ld\n", splited_values[1]);
+			printf("is nbr: %ld\n", ft_isnbr(splited_values[0]));
+			printf("is hex: %ld\n", ft_ishex_nbr(splited_values[1]));
+			if (!ft_isnbr(splited_values[0])
+				|| !ft_ishex_nbr(splited_values[1]))
 			{
+				puts("khasni ndkhol hna");
 				free_mem(splited_line);
 				free_mem(splited_values);
 				return (-1);
@@ -112,13 +117,20 @@ static void	ft_mlx_destroy(fdf *data)
 	mlx_destroy_display(data->mlx.mlx_ptr);
 }
 
-void	free_ressources(fdf *data, int index)
+void	free_ressources(fdf *data)
 {
-	while (index-- >= 0)
-		free(data->z_matrix[index]);
+	unsigned int	i;
+
+	i = data->heigth;
+	while (i -- >= 0)
+	{
+		printf("free i: %d\n", i);
+		free(data->z_matrix[i]);
+	}
 	free(data->z_matrix);
 	ft_mlx_destroy(data);
 }
+
 void	read_map(const char *filename, fdf *data)
 {
 	ssize_t	fd;
@@ -171,7 +183,7 @@ void	read_map(const char *filename, fdf *data)
 		free(line);
 		if (-1 == is_err)
 		{
-			free_ressources(data, i);
+			free_ressources(data);
 			perror(ERR_FILE);
 			exit(EXIT_FAILURE);
 		}

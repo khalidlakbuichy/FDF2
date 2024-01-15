@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 09:51:51 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/11 14:47:10 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:27:59 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ long int	ft_atoi_hex(const char *hex)
 	long int	hex_nbr;
 	const char	*hex_base;
 
+	if (NULL == hex || '\0' == *hex)
+		return (0);
 	if (NULL == ft_strnstr(hex, "0x", 2))
-		return (-1);
+		return (0);
 	if (ft_strlen(hex) > 10)
-		return (-1);
+		return (0);
 	i = 2;
 	hex_nbr = 0;
 	hex_base = "0123456789abcdef";
