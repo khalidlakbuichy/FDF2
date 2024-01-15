@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 10:57:19 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:07:39 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,14 @@ void	set_width_height(fdf *data, const char *filename)
 	close(fd);
 }
 
-ssize_t	get_width(char **splited_line)
-{
-	size_t	width;
-
-	width = 0;
-	while (NULL != splited_line[width])
-		width++;
-	return (width);
-}
-
-
-t_point	*fill_matrix(char *line)
+void	fill_matrix(t_point *z_line, char *line)
 {
 	int		i;
 	char	**splited_line;
 	char	**splited_values;
-	t_point	*z_line;
 
 	i = 0;
 	splited_line = ft_split(line, ' ');
-	z_line = (t_point *)malloc(sizeof(t_point) * get_width(splited_line));
 	while (NULL != splited_line[i])
 	{
 		z_line[i].z = ft_atoi(splited_line[i]);
@@ -90,16 +77,11 @@ t_point	*fill_matrix(char *line)
 		}
 		else
 		{
-			if (!ft_isnbr(splited_line[i]))
+			if (!ft_isnbr(splited_line[0]))
 			{
-				printf("this is the error |%s|\n", splited_line[i]);
 				perror("Wrong file format !!");
 				exit(EXIT_FAILURE);
 			}
-			if (z_line[i].z != 0)
-				z_line[i].color = 0x00d21f3c;
-			else
-				z_line[i].color = 0xffffffff;
 		}
 		i++;
 	}
@@ -121,12 +103,14 @@ void	read_map(const char *filename, fdf *data)
 	}
 	set_width_height(data, filename);
 	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));
+	i = -1;
+	while (++i <= data->heigth)
+		data->z_matrix[i] = (t_point *)malloc(sizeof(t_point) * (data->width));
 	line = get_next_line(fd);
-	data->width = get_width(ft_split(line, ' '));
 	i = 0;
 	while (NULL != line)
 	{
-		data->z_matrix[i] = fill_matrix(line);
+		fill_matrix(data->z_matrix[i],line);
 		free(line);
 		line = get_next_line(fd);
 		i++;
