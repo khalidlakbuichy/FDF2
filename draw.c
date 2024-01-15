@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 08:43:48 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:17:56 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	ft_projection(fdf *data, t_line *line)
-{
-	if (ISO == data->view)
-	{
-		data->beta = 0;
-		data->meta = 0;
-		data->tita = 0;
-		ft_rotation(data, line);
-		ft_isometric(line);
-	}
-	else
-		ft_parallel(data, line);
-}
 
 void	draw_line(fdf *data, t_line line)
 {
@@ -44,8 +31,9 @@ void	draw_line(fdf *data, t_line line)
 	line.z = data->z_matrix[line.y][line.x].z;
 	line.z1 = data->z_matrix[line.y1][line.x1].z;
 	ft_zoom(data, &line);
-	ft_projection(data, &line);
 	ft_rotation(data, &line);
+	if (ISO == data->view)
+		ft_isometric(&line);
 	ft_transalation(data, &line);
 	dda.dx = line.x1 - line.x;
 	dda.dy = line.y1 - line.y;

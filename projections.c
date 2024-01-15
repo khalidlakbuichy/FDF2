@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 09:00:59 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/14 18:08:24 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:25:27 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,16 @@ void	isometric(int *x, int *y, int z)
 	*y = -z + (previous_x + previous_y) * sin(0.523599);
 }
 
+void	isometric_centering(fdf *data)
+{
+	int center_x;
+	int center_y;
+	int center_z;
+
+	center_x = (data->width * data->zoom) / 2;
+	center_y = (data->heigth * data->zoom) / 2;
+	center_z = 0;
+	isometric(&center_x, &center_y, center_z);
+	data->shift_x = (WIDTH / 2) - center_x;
+	data->shift_y = (HEIGHT / 2) - center_y;
+}

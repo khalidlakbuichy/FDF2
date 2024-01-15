@@ -6,12 +6,30 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/14 11:56:06 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:19:38 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "keys.h"
+
+void	projection_iso_para(fdf *data, int key)
+{
+	if (KEY_LT == key)
+	{
+		data->view = PARALLEL;
+		data->tita = -1.5708;
+		data->beta = 0;
+		data->meta = 0;
+	}
+	if (KEY_LO == key)
+	{
+		data->view = ISO;
+		data->tita = 0;
+		data->beta = 0;
+		data->meta = 0;
+	}
+}
 
 void	zoom_in_out(fdf *data, int key)
 {

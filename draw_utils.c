@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 08:55:37 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/15 08:32:24 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:20:52 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,4 @@ void	ft_transalation(fdf *data, t_line *line)
 	line->x1 += data->shift_x;
 	line->y += data->shift_y;
 	line->y1 += data->shift_y;
-}
-
-void	ft_parallel(fdf *data, t_line *line)
-{
-	data->tita = -1.5708;
-	data->beta = 0;
-	data->meta = 0;
 }
