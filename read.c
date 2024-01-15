@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 11:07:39 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:54:20 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	set_width_height(fdf *data, const char *filename)
 	close(fd);
 }
 
-void	fill_matrix(t_point *z_line, char *line)
+int	fill_matrix(t_point *z_line, char *line)
 {
 	int		i;
 	char	**splited_line;
@@ -67,32 +67,42 @@ void	fill_matrix(t_point *z_line, char *line)
 		if (NULL != ft_strchr(splited_line[i], ','))
 		{
 			splited_values = ft_split(splited_line[i], ',');
-			if (!ft_isnbr(splited_values[0]))
-			{
-				perror("Wrong file format !!");
-				exit(EXIT_FAILURE);
-			}
 			z_line[i].color = ft_atoi_hex(splited_values[1]);
 			free_mem(splited_values);
+			if (!ft_isnbr(splited_values[0]))
+				exit(EXIT_FAILURE);
 		}
 		else
 		{
+			z_line[i].color = 0xffffffff;
 			if (!ft_isnbr(splited_line[0]))
-			{
-				perror("Wrong file format !!");
 				exit(EXIT_FAILURE);
-			}
 		}
 		i++;
 	}
 	free_mem(splited_line);
-	return (z_line);
+	return (1);
 }
 
+static void	ft_mlx_destroy(fdf *data)
+{
+	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img.img_ptr);
+	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.win);
+	mlx_destroy_display(data->mlx.mlx_ptr);
+}
+
+void	free_ressources(fdf *data, int index)
+{
+	while (index-- >= 0)
+		free(data->z_matrix[index]);
+	free(data->z_matrix);
+	ft_mlx_destroy(data);
+}
 void	read_map(const char *filename, fdf *data)
 {
 	ssize_t	fd;
 	int		i;
+	int		is_err;
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
@@ -101,17 +111,30 @@ void	read_map(const char *filename, fdf *data)
 		perror(ERR_OPEN);
 		exit(EXIT_FAILURE);
 	}
+	line = get_next_line(fd);
+	if (NULL == line)
+	{
+		ft_mlx_destroy(data);
+		free(data);
+		perror(ERR_FILE);
+		exit(EXIT_FAILURE);
+	}
 	set_width_height(data, filename);
 	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));
 	i = -1;
 	while (++i <= data->heigth)
 		data->z_matrix[i] = (t_point *)malloc(sizeof(t_point) * (data->width));
-	line = get_next_line(fd);
 	i = 0;
 	while (NULL != line)
 	{
-		fill_matrix(data->z_matrix[i],line);
+		is_err = fill_matrix(data->z_matrix[i], line);
 		free(line);
+		if (-1 == is_err)
+		{
+			free_ressources(data, i);
+			perror(ERR_FILE);
+			exit(EXIT_FAILURE);
+		}
 		line = get_next_line(fd);
 		i++;
 	}
