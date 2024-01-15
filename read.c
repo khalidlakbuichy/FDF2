@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 15:18:43 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:25:08 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,16 @@ int	fill_matrix(t_point *z_line, char *line)
 
 	i = 0;
 	splited_line = ft_split(line, ' ');
+	if (NULL == splited_line)
+		return (-1);
 	while (NULL != splited_line[i])
 	{
 		z_line[i].z = ft_atoi(splited_line[i]);
 		if (NULL != ft_strchr(splited_line[i], ','))
 		{
 			splited_values = ft_split(splited_line[i], ',');
+			if (NULL == splited_values[i])
+				return (-1);
 			z_line[i].color = ft_atoi_hex(splited_values[1]);
 			if (!ft_isnbr(splited_values[0]))
 			{
@@ -148,7 +152,7 @@ void	read_map(const char *filename, fdf *data)
 		data->z_matrix[i] = (t_point *)malloc(sizeof(t_point) * (data->width));
 		if (NULL == data->z_matrix[i])
 		{
-			free_matrix();
+			free_matrix(data->z_matrix, i);
 			ft_mlx_destroy(data);
 			free(data);
 			perror(ERR_FILE);
