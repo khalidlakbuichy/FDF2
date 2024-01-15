@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 15:25:08 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:32:47 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,17 @@ int	fill_matrix(t_point *z_line, char *line)
 		if (NULL != ft_strchr(splited_line[i], ','))
 		{
 			splited_values = ft_split(splited_line[i], ',');
-			if (NULL == splited_values[i])
+			if (NULL == splited_values)
+			{
+				free_mem(splited_line);
 				return (-1);
+			}
 			z_line[i].color = ft_atoi_hex(splited_values[1]);
 			if (!ft_isnbr(splited_values[0]))
 			{
+				free_mem(splited_line);
 				free_mem(splited_values);
-				exit(EXIT_FAILURE);
+				return (-1);
 			}
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:45:33 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/15 14:53:28 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:34:39 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,31 @@ int	ft_isnbr(const char *str)
 	i = 0;
 	while (is_white(str[i]) && 0 != str[i])
 		i++;
+	if ('-' == str[i])
+		i++;
+	if (is_white(str[i]))
+		return (0);
+	while (0 != str[i])
+	{
+		if (is_white(str[i]))
+			break ;
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+int	ft_ishex_nbr(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (is_white(str[i]) && 0 != str[i])
+		i++;
+	if ()
+	{
+		
+	}
 	if ('-' == str[i])
 		i++;
 	if (is_white(str[i]))
