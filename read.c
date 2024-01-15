@@ -6,40 +6,12 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 10:08:14 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:57:19 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "errors.h"
 #include "fdf.h"
-
-size_t	get_heigth(const char *filename)
-{
-	ssize_t	fd;
-	size_t	heigth;
-	char	*line;
-
-	fd = open(filename, O_RDONLY);
-	heigth = 0;
-	line = get_next_line(fd);
-	while (NULL != line)
-	{
-		heigth++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (heigth);
-}
-
-ssize_t	get_width(char **splited_line)
-{
-	size_t	width;
-
-	width = 0;
-	while (NULL != splited_line[width])
-		width++;
-	return (width);
-}
 
 void	free_mem(char **memory)
 {
@@ -53,6 +25,44 @@ void	free_mem(char **memory)
 		free(memory);
 	}
 }
+
+void	set_width_height(fdf *data, const char *filename)
+{
+	ssize_t	fd;
+	size_t	heigth;
+	size_t	width;
+	char	*line;
+	char	**splited_line;
+
+	fd = open(filename, O_RDONLY);
+	line = get_next_line(fd);
+	splited_line = ft_split(line, ' ');
+	width = 0;
+	while (NULL != splited_line[width])
+		width++;
+	free_mem(splited_line);
+	heigth = 0;
+	while (NULL != line)
+	{
+		heigth++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	data->width = width;
+	data->heigth = heigth;
+	close(fd);
+}
+
+ssize_t	get_width(char **splited_line)
+{
+	size_t	width;
+
+	width = 0;
+	while (NULL != splited_line[width])
+		width++;
+	return (width);
+}
+
 
 t_point	*fill_matrix(char *line)
 {
@@ -106,10 +116,10 @@ void	read_map(const char *filename, fdf *data)
 	fd = open(filename, O_RDONLY);
 	if (-1 == fd)
 	{
-		perror("Can't open the file");
+		perror(ERR_OPEN);
 		exit(EXIT_FAILURE);
 	}
-	data->heigth = get_heigth(filename);
+	set_width_height(data, filename);
 	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));
 	line = get_next_line(fd);
 	data->width = get_width(ft_split(line, ' '));

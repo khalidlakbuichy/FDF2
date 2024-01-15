@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 09:51:53 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:42:42 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,5 @@ void				isometric_centering(fdf *data);
 void				projection_iso_para(fdf *data, int key);
 void				ft_centering(fdf *data);
 int					ft_isnbr(const char *str);
-
+void				print_menu(fdf *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:45:33 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/15 10:11:10 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:12:43 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ int	ft_isnbr(const char *str)
 		i++;
 	if ('-' == str[i])
 		i++;
+	if (is_white(str[i]))
+		return (0);
 	while (0 != str[i])
 	{
-		if (!ft_isdigit(str[i]))
-			return (0);
 		if (is_white(str[i]))
 			break ;
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
 	}
 	return (1);

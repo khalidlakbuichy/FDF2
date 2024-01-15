@@ -6,12 +6,12 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/14 14:54:51 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:31:30 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "keys.h"
+#include "errors.h"
 
 int	ft_close(void *param)
 {
@@ -25,12 +25,17 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		perror("enter enter only one parametr to the progtam !");
+		perror(ERR_ARGS);
 		return (EXIT_FAILURE);
 	}
 	data = (fdf *)malloc(sizeof(fdf));
-	read_map(av[1], data);
+	if (NULL == data)
+	{
+		perror(ERR_MEM);
+		return (EXIT_FAILURE);
+	}
 	ft_init(data);
+	read_map(av[1], data);
 	draw_map(data);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win,
 		data->mlx.img.img_ptr, 0, 0);
