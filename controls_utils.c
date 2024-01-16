@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:07:09 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 15:59:39 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:14:19 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	deal_key(int key, fdf *data)
 {
 	if (KEY_ESC == key)
 	{
-		puts("test");
 		free_all_ressources(data);
 		exit(EXIT_SUCCESS);
 	}

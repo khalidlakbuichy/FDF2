@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 16:04:54 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:41:56 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@ void	projection_iso_para(fdf *data, int key)
 
 void	zoom_in_out(fdf *data, int key)
 {
-	if (KEY_PLUS == key || KEY_LM == key)
+	if (KEY_PLUS == key && data->zoom <= 50)
 	{
 		data->zoom *= exp(0.02);
 		ft_centering(data);
 	}
-	if (KEY_MINUS == key)
+	if (KEY_MINUS == key && data->zoom > 2)
 	{
-		data->zoom *= exp(-0.02);
+		if (data->zoom > 2)
+			data->zoom *= exp(-0.02);
 		ft_centering(data);
 	}
 }
@@ -79,8 +80,11 @@ void	upper_lower_z(fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-				if (data->z_matrix[y][x].z <= 500)
-					data->z_matrix[y][x].z *= 1.25;
+			{
+				printf("z: %d\n", data->z_matrix[y][x].z);
+				if (data->z_matrix[y][x].z > 0 && data->z_matrix[y][x].z <= 500)
+					data->z_matrix[y][x].z += 5;
+			}
 		}
 	}
 	if (KEY_LL == key)
@@ -90,7 +94,8 @@ void	upper_lower_z(fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-				data->z_matrix[y][x].z /= 1.25;
+				if (data->z_matrix[y][x].z > 5)
+					data->z_matrix[y][x].z -= 5;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 11:01:06 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 14:44:32 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:23:18 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	deal_mouse(int button, int x, int y, fdf *data)
 	float	factor;
 
 	factor = 0.5;
-	if (button == 4)
+	if (4 == button && data->zoom <= 50)
 	{
 		data->zoom = lerp(data->zoom, data->zoom * 1.1, factor);
 		ft_centering(data);
 	}
-	else if (button == 5)
+	else if (5 == button && data->zoom > 2)
 	{
 		data->zoom = lerp(data->zoom, data->zoom / 1.1, factor);
 		ft_centering(data);

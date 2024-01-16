@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 16:03:45 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:15:40 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ static void	matrix_allocation(fdf *data, ssize_t fd)
 	i = 0;
 	while (NULL != line)
 	{
-		printf("line: %d\n", i);
 		if (-1 == fill_matrix(data->z_matrix[i], line))
 		{
 			free(line);
@@ -128,7 +127,9 @@ void	read_map(const char *filename, fdf *data)
 	ft_init_zoom(data);
 	ft_centering(data);
 	if (0 == data->heigth)
+	{
 		free_all_exit(data, ERR_FILE);
+	}
 	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));
 	if (NULL == data->z_matrix)
 		free_all_exit(data, ERR_MEM);

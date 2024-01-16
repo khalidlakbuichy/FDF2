@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 14:37:14 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:13:49 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void				draw_line(fdf *data, t_line line);
 void				x_rotation(int *y, int *z, float *tita);
 void				y_rotation(int *x, int *z, float *beta);
 void				z_rotation(int *x, int *y, float *meta);
-void				one_point_perspective(int *x, int *y, int z);
 void				isometric(int *x, int *y, int z);
 int					ft_max(int a, int b);
 void				ft_rotation(fdf *data, t_line *line);
@@ -117,13 +116,11 @@ void				ft_init(fdf *data);
 int					deal_mouse(int button, int x, int y, fdf *data);
 void				ft_render(fdf *data);
 void				ft_init_data(fdf *data);
-void				center_object(fdf *data);
 void				isometric_centering(fdf *data);
 void				projection_iso_para(fdf *data, int key);
 void				ft_centering(fdf *data);
 int					ft_isnbr(const char *str);
 void				print_menu(fdf *data);
-int					ft_ishex_nbr(const char *str);
 void				ft_mlx_destroy(fdf *data);
 void				free_all_exit(fdf *data, const char *str);
 void				free_all_ressources(fdf *data);
