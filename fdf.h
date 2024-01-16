@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 15:54:56 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:53:16 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,6 @@ void				ft_centering(fdf *data);
 int					ft_isnbr(const char *str);
 void				print_menu(fdf *data);
 int					ft_ishex_nbr(const char *str);
+void				ft_mlx_destroy(fdf *data);
 
 #endif

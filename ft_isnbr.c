@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:45:33 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/15 18:33:28 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:41:39 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	ft_isnbr(const char *str)
 	}
 	return (1);
 }
+
 static int	ft_ishexdigit(char c)
 {
 	char	h;

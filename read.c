@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 18:38:11 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:54:33 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ void	free_matrix(t_point **z_matrix, int heigth)
 {
 	if (NULL != z_matrix)
 	{
-		while (heigth-- >= 0)
+		while (heigth >= 0)
+		{
 			free(z_matrix[heigth]);
+			heigth--;
+		}
+		free(z_matrix);
 	}
-	free(z_matrix);
 }
 
 int	fill_matrix(t_point *z_line, char *line)
@@ -101,8 +104,11 @@ int	fill_matrix(t_point *z_line, char *line)
 		else
 		{
 			z_line[i].color = 0xffffffff;
-			if (!ft_isnbr(splited_line[0]))
-				exit(EXIT_FAILURE);
+			if (!ft_isnbr(splited_line[i]))
+			{
+				free_mem(splited_line);
+				return (-1);
+			}
 		}
 		i++;
 	}
@@ -110,7 +116,7 @@ int	fill_matrix(t_point *z_line, char *line)
 	return (1);
 }
 
-static void	ft_mlx_destroy(fdf *data)
+void	ft_mlx_destroy(fdf *data)
 {
 	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img.img_ptr);
 	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.win);
@@ -119,13 +125,13 @@ static void	ft_mlx_destroy(fdf *data)
 
 void	free_ressources(fdf *data)
 {
-	unsigned int	i;
+	int	i;
 
 	i = data->heigth;
-	while (i -- >= 0)
+	while (i >= 0)
 	{
-		printf("free i: %d\n", i);
 		free(data->z_matrix[i]);
+		i--;
 	}
 	free(data->z_matrix);
 	ft_mlx_destroy(data);
