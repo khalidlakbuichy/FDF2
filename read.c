@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 14:37:24 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:03:45 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ static int	fill_matrix_color(t_point *z_line, char *splited_line)
 			return (-1);
 		z_line->color = ft_atoi_hex(splited_values[1]);
 		if (!ft_isnbr(splited_values[0]) || !ft_ishex(splited_values[1]))
-		{
-			free_double_ptr(splited_values);
-			return (-1);
-		}
+			return (free_double_ptr(splited_values), -1);
+		free_double_ptr(splited_values);
 	}
 	else
 	{
@@ -64,7 +62,7 @@ static int	fill_matrix_color(t_point *z_line, char *splited_line)
 		if (0 != z_line->z)
 			z_line->color = 0xffda012d;
 	}
-	return(1);
+	return (1);
 }
 
 static int	fill_matrix(t_point *z_line, char *line)
@@ -72,11 +70,11 @@ static int	fill_matrix(t_point *z_line, char *line)
 	int		i;
 	char	**splited_line;
 
-	i = 0;
 	splited_line = ft_split(line, ' ');
 	if (NULL == splited_line)
 		return (-1);
-	while (NULL != splited_line[i])
+	i = 0;
+	while (NULL != splited_line[i] && '\n' != splited_line[i][0])
 	{
 		z_line[i].z = ft_atoi(splited_line[i]);
 		if (-1 == fill_matrix_color(&z_line[i], splited_line[i]))
@@ -106,6 +104,7 @@ static void	matrix_allocation(fdf *data, ssize_t fd)
 	i = 0;
 	while (NULL != line)
 	{
+		printf("line: %d\n", i);
 		if (-1 == fill_matrix(data->z_matrix[i], line))
 		{
 			free(line);
@@ -127,6 +126,7 @@ void	read_map(const char *filename, fdf *data)
 		free_all_exit(data, ERR_OPEN);
 	set_width_height(data, filename);
 	ft_init_zoom(data);
+	ft_centering(data);
 	if (0 == data->heigth)
 		free_all_exit(data, ERR_FILE);
 	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));

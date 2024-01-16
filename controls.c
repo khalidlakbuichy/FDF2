@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/15 09:29:08 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:04:54 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,30 @@ void	zoom_in_out(fdf *data, int key)
 
 void	shift_x_y(fdf *data, int key)
 {
-	if (key == 65362)
+	if (KEY_ARR_UP == key)
 		data->shift_y -= 20;
-	if (key == 65364)
+	if (KEY_ARR_DOWN == key)
 		data->shift_y += 20;
-	if (key == 65363)
+	if (KEY_ARR_RIGHT == key)
 		data->shift_x += 20;
-	if (key == 65361)
+	if (KEY_ARR_LEFT == key)
 		data->shift_x -= 20;
 }
 
 void	rotation_x_y_z(fdf *data, int key)
 {
-	if (key == 121)
+	if (KEY_LX == key)
 		data->beta += 0.25;
-	if (key == 122)
+	if (KEY_LY == key)
 		data->meta += 0.25;
-	if (key == 120)
+	if (KEY_LZ == key)
 		data->tita += 0.25;
 }
 
 void	upper_lower_z(fdf *data, int key)
 {
-	unsigned	x;
-	unsigned	y;
+	unsigned int	x;
+	unsigned int	y;
 
 	if (KEY_LU == key)
 	{
@@ -79,7 +79,7 @@ void	upper_lower_z(fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-				if (data->z_matrix[y][x].z <= 65536)
+				if (data->z_matrix[y][x].z <= 500)
 					data->z_matrix[y][x].z *= 1.25;
 		}
 	}
@@ -90,8 +90,7 @@ void	upper_lower_z(fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-				if (data->z_matrix[y][x].z <= 65536)
-					data->z_matrix[y][x].z /= 1.25;
+				data->z_matrix[y][x].z /= 1.25;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 08:57:06 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/14 15:02:49 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:07:37 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	y_rotation(int *x, int *z, float *beta)
 
 void	z_rotation(int *x, int *y, float *meta)
 {
-	int original_x;
-	int original_y;
+	int	original_x;
+	int	original_y;
 
 	original_x = *x;
 	original_y = *y;

@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 13:38:15 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:06:15 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_close(void *param)
 
 int	main(int ac, char **av)
 {
-	fdf *data;
+	fdf	*data;
 
 	if (ac != 2)
 	{

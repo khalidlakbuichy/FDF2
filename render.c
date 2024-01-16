@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:30:05 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/15 10:43:20 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:07:07 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	print_menu(fdf *data)
 	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "z: fro Z-Axis");
 	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Projection");
 	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "Isometric: i key");
+	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "Parallel: t key");
 	mlx_string_put(mlx, win, 57, y += 25, 0xffffffff, "one point view: o Key");
 	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Reset: r Key");
 }

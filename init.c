@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 14:43:23 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:05:52 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 void	ft_init_zoom(fdf *data)
 {
+	if (0 == data->width)
+		return ;
 	if (data->width < 20)
 		data->zoom = 50;
 	else if (data->width < 50)
@@ -31,13 +33,15 @@ static void	mlx_fail(fdf *data)
 	perror(ERR_MLX);
 	exit(EXIT_FAILURE);
 }
-static void	ft_init_data(fdf *data)
+
+void	ft_init_data(fdf *data)
 {
 	data->view = ISO;
 	ft_centering(data);
 	data->tita = 0;
 	data->meta = 0;
 	data->beta = 0;
+	ft_init_zoom(data);
 }
 
 void	ft_init(fdf *data)
