@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:15:36 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 17:42:38 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:06:14 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	free_all_ressources(t_fdf *data)
 	free(data);
 }
 
-void	free_all_exit(t_fdf *data, const char *str)
+void	free_all_exit(t_fdf *data, char *str)
 {
 	free_all_ressources(data);
-	perror(str);
+	ft_putendl_fd(str, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }

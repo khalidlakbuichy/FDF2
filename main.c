@@ -6,12 +6,12 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 17:47:30 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:12:18 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include "errors.h"
+#include "fdf.h"
 
 int	ft_close(void *param)
 {
@@ -25,13 +25,13 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		perror(ERR_ARGS);
+		ft_putendl_fd(ERR_OPEN, STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	data = (t_fdf *)malloc(sizeof(t_fdf));
 	if (NULL == data)
 	{
-		perror(ERR_MEM);
+		ft_putendl_fd(ERR_MEM, STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	ft_init(data);

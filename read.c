@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 17:42:38 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:24:27 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	set_width_height(t_fdf *data, const char *filename)
 	line = get_next_line(fd);
 	splited_line = ft_split(line, ' ');
 	width = 0;
-	while (NULL != splited_line[width])
+	while (NULL != splited_line[width] && '\n' != splited_line[width][0])
 		width++;
 	free_double_ptr(splited_line);
 	heigth = 0;

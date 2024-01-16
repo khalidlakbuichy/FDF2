@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 17:44:16 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:29:02 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_init_zoom(t_fdf *data)
 static void	mlx_fail(t_fdf *data)
 {
 	free(data);
-	perror(ERR_MLX);
+	ft_putendl_fd(ERR_MLX, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
 

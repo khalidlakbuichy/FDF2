@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 17:42:38 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:44:52 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_fdf
 	float			beta;
 	float			meta;
 	t_mlx			mlx;
-}					t_fdf ;
+}					t_fdf;
 
 typedef struct s_dda
 {
@@ -122,7 +122,7 @@ void				ft_centering(t_fdf *data);
 int					ft_isnbr(const char *str);
 void				print_menu(t_fdf *data);
 void				ft_mlx_destroy(t_fdf *data);
-void				free_all_exit(t_fdf *data, const char *str);
+void				free_all_exit(t_fdf *data, char *str);
 void				free_all_ressources(t_fdf *data);
 void				free_matrix(t_point **z_matrix);
 void				ft_mlx_destroy(t_fdf *data);

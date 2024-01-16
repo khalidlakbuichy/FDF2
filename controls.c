@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 17:55:17 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:45:30 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	upper_lower_z(t_fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-				if (data->z_matrix[y][x].z > 0 && data->z_matrix[y][x].z <= 500)
+				if (data->z_matrix[y][x].z != 0 && data->z_matrix[y][x].z <= 500)
 					data->z_matrix[y][x].z *= 1.25;
 		}
 	}
@@ -91,8 +91,10 @@ void	upper_lower_z(t_fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-				if (data->z_matrix[y][x].z > 0)
+			{
+ 				if (data->z_matrix[y][x].z != 0)
 					data->z_matrix[y][x].z = data->z_matrix[y][x].z / 1.25 + 1;
+			}
 		}
 	}
 }

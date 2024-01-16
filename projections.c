@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 09:00:59 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 17:53:54 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:17:58 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	isometric(int *x, int *y, int z)
 
 	previous_x = *x;
 	previous_y = *y;
+	// printf("%d ---- \n", z);
 	*x = (previous_x - previous_y) * cos(0.523599);
 	*y = -z + (previous_x + previous_y) * sin(0.523599);
 }
