@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:15:36 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 09:07:16 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:03:19 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	ft_mlx_destroy(fdf *data)
 
 void	free_matrix(t_point **z_matrix)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (NULL != z_matrix)
-	{ 
+	{
 		while (NULL != z_matrix[++i])
 			free(z_matrix[i]);
 		free(z_matrix);
@@ -39,7 +39,7 @@ void	free_all_ressources(fdf *data)
 	free(data);
 }
 
-void free_all_exit(fdf *data, const char *str)
+void	free_all_exit(fdf *data, const char *str)
 {
 	free_all_ressources(data);
 	perror(str);

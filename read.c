@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 10:43:41 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:00:23 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	free_mem(char **memory)
 			free(memory[i++]);
 		free(memory);
 	}
+	/* make return void*/
 	return (1);
 }
 
@@ -76,13 +77,10 @@ int	fill_matrix(t_point *z_line, char *line)
 				return (-1);
 			}
 			z_line[i].color = ft_atoi_hex(splited_values[1]);
-			printf("narii: %ld\n", splited_values[1]);
-			printf("is nbr: %ld\n", ft_isnbr(splited_values[0]));
-			printf("is hex: %ld\n", ft_ishex_nbr(splited_values[1]));
+			/* check for hex nbr and nbr */
 			if (!ft_isnbr(splited_values[0])
 				|| !ft_ishex_nbr(splited_values[1]))
 			{
-				puts("khasni ndkhol hna");
 				free_mem(splited_line);
 				free_mem(splited_values);
 				return (-1);
@@ -91,6 +89,8 @@ int	fill_matrix(t_point *z_line, char *line)
 		else
 		{
 			z_line[i].color = 0xffffffff;
+			if (0 != z_line[i].z)
+				z_line[i].color = 0xffda012d;
 			if (!ft_isnbr(splited_line[i]))
 			{
 				free_mem(splited_line);
@@ -112,74 +112,38 @@ void	read_map(const char *filename, fdf *data)
 
 	fd = open(filename, O_RDONLY);
 	if (-1 == fd)
-	{
 		free_all_exit(data, ERR_OPEN);
-		// ft_mlx_destroy(data);
-		// free(data);
-		// perror(ERR_OPEN);
-		// exit(EXIT_FAILURE);
-	}
 	set_width_height(data, filename);
 	if (0 == data->heigth)
-	{
 		free_all_exit(data, ERR_FILE);
-		// ft_mlx_destroy(data);
-		// free(data);
-		// perror(ERR_FILE);
-		// exit(EXIT_FAILURE);
-	}
 	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));
-	// printf("hei: %d\n", data->heigth);
-	for (int i = 0; i < (data->heigth + 1); i++)
-		printf( "addr: %p\n", *(data->z_matrix + i));
 	if (NULL == data->z_matrix)
-	{
 		free_all_exit(data, ERR_MEM);
-		// ft_mlx_destroy(data);
-		// free(data);
-		// perror(ERR_MEM);
-		// exit(EXIT_FAILURE);
-	}
-	printf("matrix: %p\n", data->z_matrix[0]);
-	ft_bzero(*(data->z_matrix), (sizeof(t_point *) * (data->heigth + 1)));
-	printf("%ld   bytes:----------------------------------------\n", (sizeof(t_point *) * (data->heigth + 1)));
-	// for (int i = 0; i < data->heigth; i++)
-	// 	printf("matrix: %p\n", *(data->z_matrix)[i]);
-
-	// printf("heigth: %d\n", data->heigth + 1);
+	ft_bzero(data->z_matrix, (sizeof(t_point *) * (data->heigth + 1)));
+	for (int i = 0; i < data->heigth; i++)
+		printf("matrix: %p\n", data->z_matrix[i]);
 	i = -1;
-	while (++i <= data->heigth)
+	while (++i < data->heigth)
 	{
-		printf("i: %d\n", i);
 		data->z_matrix[i] = (t_point *)malloc(sizeof(t_point) * (data->width));
-		puts("test");
 		if (NULL == data->z_matrix[i])
-		{
 			free_all_exit(data, ERR_MEM);
-			// free_matrix(data->z_matrix, i);
-			// ft_mlx_destroy(data);
-			// free(data);
-			// perror(ERR_MEM);
-			// exit(EXIT_FAILURE);
-		}
 	}
 	line = get_next_line(fd);
-	i = -1;
+	i = 0;
 	while (NULL != line)
 	{
-		if (-1 == fill_matrix(data->z_matrix[++i], line))
+		if (-1 == fill_matrix(data->z_matrix[i], line))
 		{
 			free(line);
 			free_all_exit(data, ERR_FILE);
-			// free_ressources(data);
-			// perror(ERR_FILE);
-			// exit(EXIT_FAILURE);
 		}
+		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
 	data->z_matrix[i] = NULL;
 	close(fd);
-
 	for (int y = 0; y < data->heigth; y++)
 	{
 		for (int x = 0; x < data->width; x++)
