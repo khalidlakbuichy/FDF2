@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 16:13:49 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:42:38 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ typedef struct s_line
 	unsigned int	color;
 }					t_line;
 
-typedef enum
+typedef enum e_projection
 {
 	ISO,
 	PARALLEL
-}					projection;
+}					t_projection;
 
 typedef struct s_fdf
 {
 	unsigned int	width;
 	unsigned int	heigth;
 	t_point			**z_matrix;
-	projection		view;
+	t_projection	view;
 	double			zoom;
 	int				shift_x;
 	int				shift_y;
@@ -78,7 +78,7 @@ typedef struct s_fdf
 	float			beta;
 	float			meta;
 	t_mlx			mlx;
-}					fdf;
+}					t_fdf ;
 
 typedef struct s_dda
 {
@@ -92,42 +92,42 @@ typedef struct s_dda
 }					t_dda;
 
 char				*get_next_line(int fd);
-void				read_map(const char *filename, fdf *data);
+void				read_map(const char *filename, t_fdf *data);
 void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void				draw_map(fdf *data);
-void				draw_line(fdf *data, t_line line);
+void				draw_map(t_fdf *data);
+void				draw_line(t_fdf *data, t_line line);
 void				x_rotation(int *y, int *z, float *tita);
 void				y_rotation(int *x, int *z, float *beta);
 void				z_rotation(int *x, int *y, float *meta);
 void				isometric(int *x, int *y, int z);
 int					ft_max(int a, int b);
-void				ft_rotation(fdf *data, t_line *line);
-void				ft_zoom(fdf *data, t_line *line);
+void				ft_rotation(t_fdf *data, t_line *line);
+void				ft_zoom(t_fdf *data, t_line *line);
 void				ft_isometric(t_line *line);
-void				ft_transalation(fdf *data, t_line *line);
-void				rotation_x_y_z(fdf *data, int key);
-void				shift_x_y(fdf *data, int key);
-void				rotation_x_y_z(fdf *data, int key);
+void				ft_transalation(t_fdf *data, t_line *line);
+void				rotation_x_y_z(t_fdf *data, int key);
+void				shift_x_y(t_fdf *data, int key);
+void				rotation_x_y_z(t_fdf *data, int key);
 long int			ft_atoi_hex(const char *hex);
-int					deal_key(int key, fdf *data);
-void				upper_lower_z(fdf *data, int key);
-void				zoom_in_out(fdf *data, int key);
-void				ft_init(fdf *data);
-int					deal_mouse(int button, int x, int y, fdf *data);
-void				ft_render(fdf *data);
-void				ft_init_data(fdf *data);
-void				isometric_centering(fdf *data);
-void				projection_iso_para(fdf *data, int key);
-void				ft_centering(fdf *data);
+int					deal_key(int key, t_fdf *data);
+void				upper_lower_z(t_fdf *data, int key);
+void				zoom_in_out(t_fdf *data, int key);
+void				ft_init(t_fdf *data);
+int					deal_mouse(int button, int x, int y, t_fdf *data);
+void				ft_render(t_fdf *data);
+void				ft_init_data(t_fdf *data);
+void				isometric_centering(t_fdf *data);
+void				projection_iso_para(t_fdf *data, int key);
+void				ft_centering(t_fdf *data);
 int					ft_isnbr(const char *str);
-void				print_menu(fdf *data);
-void				ft_mlx_destroy(fdf *data);
-void				free_all_exit(fdf *data, const char *str);
-void				free_all_ressources(fdf *data);
+void				print_menu(t_fdf *data);
+void				ft_mlx_destroy(t_fdf *data);
+void				free_all_exit(t_fdf *data, const char *str);
+void				free_all_ressources(t_fdf *data);
 void				free_matrix(t_point **z_matrix);
-void				ft_mlx_destroy(fdf *data);
+void				ft_mlx_destroy(t_fdf *data);
 int					ft_ishex(const char *str);
 int					free_double_ptr(char **memory);
-void				ft_init_zoom(fdf *data);
+void				ft_init_zoom(t_fdf *data);
 
 #endif

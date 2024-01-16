@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 10:40:30 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:42:38 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_line(fdf *data, t_line line)
+void	draw_line(t_fdf *data, t_line line)
 {
 	t_dda	dda;
 	int		i;
@@ -51,7 +51,7 @@ void	draw_line(fdf *data, t_line line)
 	}
 }
 
-void	draw_map(fdf *data)
+void	draw_map(t_fdf *data)
 {
 	t_line	line;
 

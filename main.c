@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:52:14 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 16:06:15 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:47:30 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	ft_close(void *param)
 
 int	main(int ac, char **av)
 {
-	fdf	*data;
+	t_fdf	*data;
 
 	if (ac != 2)
 	{
 		perror(ERR_ARGS);
 		return (EXIT_FAILURE);
 	}
-	data = (fdf *)malloc(sizeof(fdf));
+	data = (t_fdf *)malloc(sizeof(t_fdf));
 	if (NULL == data)
 	{
 		perror(ERR_MEM);

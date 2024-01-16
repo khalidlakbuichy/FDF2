@@ -6,14 +6,14 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 16:15:40 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:42:38 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "errors.h"
 #include "fdf.h"
 
-static void	set_width_height(fdf *data, const char *filename)
+static void	set_width_height(t_fdf *data, const char *filename)
 {
 	ssize_t	fd;
 	size_t	heigth;
@@ -88,7 +88,7 @@ static int	fill_matrix(t_point *z_line, char *line)
 	return (1);
 }
 
-static void	matrix_allocation(fdf *data, ssize_t fd)
+static void	matrix_allocation(t_fdf *data, ssize_t fd)
 {
 	int		i;
 	char	*line;
@@ -116,7 +116,7 @@ static void	matrix_allocation(fdf *data, ssize_t fd)
 	data->z_matrix[i] = NULL;
 }
 
-void	read_map(const char *filename, fdf *data)
+void	read_map(const char *filename, t_fdf *data)
 {
 	ssize_t	fd;
 

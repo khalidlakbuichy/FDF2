@@ -6,13 +6,13 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 08:55:37 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 16:05:13 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:42:38 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_rotation(fdf *data, t_line *line)
+void	ft_rotation(t_fdf *data, t_line *line)
 {
 	x_rotation(&line->y, &line->z, &data->tita);
 	x_rotation(&line->y1, &line->z1, &data->tita);
@@ -22,7 +22,7 @@ void	ft_rotation(fdf *data, t_line *line)
 	z_rotation(&line->x1, &line->y1, &data->meta);
 }
 
-void	ft_zoom(fdf *data, t_line *line)
+void	ft_zoom(t_fdf *data, t_line *line)
 {
 	line->x *= data->zoom;
 	line->y *= data->zoom;
@@ -36,7 +36,7 @@ void	ft_isometric(t_line *line)
 	isometric(&line->x1, &line->y1, line->z1);
 }
 
-void	ft_transalation(fdf *data, t_line *line)
+void	ft_transalation(t_fdf *data, t_line *line)
 {
 	line->x += data->shift_x;
 	line->x1 += data->shift_x;

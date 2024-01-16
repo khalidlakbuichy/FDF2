@@ -6,14 +6,14 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 16:05:52 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:44:16 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "errors.h"
 #include "fdf.h"
 
-void	ft_init_zoom(fdf *data)
+void	ft_init_zoom(t_fdf *data)
 {
 	if (0 == data->width)
 		return ;
@@ -27,31 +27,31 @@ void	ft_init_zoom(fdf *data)
 		data->zoom = 2;
 }
 
-static void	mlx_fail(fdf *data)
+static void	mlx_fail(t_fdf *data)
 {
 	free(data);
 	perror(ERR_MLX);
 	exit(EXIT_FAILURE);
 }
 
-void	ft_init_data(fdf *data)
+void	ft_init_data(t_fdf *data)
 {
 	data->view = ISO;
-	ft_centering(data);
 	data->tita = 0;
 	data->meta = 0;
 	data->beta = 0;
 	ft_init_zoom(data);
+	ft_centering(data);
 }
 
-void	ft_init(fdf *data)
+void	ft_init(t_fdf *data)
 {
-	ft_bzero(data, sizeof(fdf));
+	ft_bzero(data, sizeof(t_fdf));
 	data->mlx.mlx_ptr = mlx_init();
 	if (NULL == data->mlx.mlx_ptr)
 		mlx_fail(data);
 	data->mlx.win = mlx_new_window(data->mlx.mlx_ptr, WIDTH, HEIGHT,
-			"wireframe model (FDF)");
+			"wireframe model (fdf)");
 	if (NULL == data->mlx.win)
 	{
 		mlx_destroy_display(data->mlx.mlx_ptr);

@@ -6,13 +6,13 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:30:05 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 16:07:07 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:42:38 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	print_menu(fdf *data)
+void	print_menu(t_fdf *data)
 {
 	int		y;
 	void	*mlx;
@@ -37,7 +37,7 @@ void	print_menu(fdf *data)
 	mlx_string_put(mlx, win, 15, y += 30, 0xffffffff, "Reset: r Key");
 }
 
-void	ft_render(fdf *data)
+void	ft_render(t_fdf *data)
 {
 	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img.img_ptr);
 	data->mlx.img.img_ptr = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);

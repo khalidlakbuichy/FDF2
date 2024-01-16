@@ -6,14 +6,14 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 16:41:56 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:55:17 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "keys.h"
 
-void	projection_iso_para(fdf *data, int key)
+void	projection_iso_para(t_fdf *data, int key)
 {
 	if (KEY_LT == key)
 	{
@@ -31,7 +31,7 @@ void	projection_iso_para(fdf *data, int key)
 	}
 }
 
-void	zoom_in_out(fdf *data, int key)
+void	zoom_in_out(t_fdf *data, int key)
 {
 	if (KEY_PLUS == key && data->zoom <= 50)
 	{
@@ -46,7 +46,7 @@ void	zoom_in_out(fdf *data, int key)
 	}
 }
 
-void	shift_x_y(fdf *data, int key)
+void	shift_x_y(t_fdf *data, int key)
 {
 	if (KEY_ARR_UP == key)
 		data->shift_y -= 20;
@@ -58,7 +58,7 @@ void	shift_x_y(fdf *data, int key)
 		data->shift_x -= 20;
 }
 
-void	rotation_x_y_z(fdf *data, int key)
+void	rotation_x_y_z(t_fdf *data, int key)
 {
 	if (KEY_LX == key)
 		data->beta += 0.25;
@@ -68,7 +68,7 @@ void	rotation_x_y_z(fdf *data, int key)
 		data->tita += 0.25;
 }
 
-void	upper_lower_z(fdf *data, int key)
+void	upper_lower_z(t_fdf *data, int key)
 {
 	unsigned int	x;
 	unsigned int	y;
@@ -80,11 +80,8 @@ void	upper_lower_z(fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-			{
-				printf("z: %d\n", data->z_matrix[y][x].z);
 				if (data->z_matrix[y][x].z > 0 && data->z_matrix[y][x].z <= 500)
-					data->z_matrix[y][x].z += 5;
-			}
+					data->z_matrix[y][x].z *= 1.25;
 		}
 	}
 	if (KEY_LL == key)
@@ -94,8 +91,8 @@ void	upper_lower_z(fdf *data, int key)
 		{
 			x = -1;
 			while (++x < data->width)
-				if (data->z_matrix[y][x].z > 5)
-					data->z_matrix[y][x].z -= 5;
+				if (data->z_matrix[y][x].z > 0)
+					data->z_matrix[y][x].z = data->z_matrix[y][x].z / 1.25 + 1;
 		}
 	}
 }
