@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 15:06:19 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:40:30 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
-
 
 void	draw_line(fdf *data, t_line line)
 {

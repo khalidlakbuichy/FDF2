@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/15 11:33:22 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 09:13:14 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,10 @@ void	ft_init_data(fdf *data)
 	data->meta = 0;
 	data->beta = 0;
 }
-void	ft_destroy_all(fdf *data)
-{
-	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img.img_ptr);
-	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.win);
-	mlx_destroy_display(data->mlx.mlx_ptr);
-	free(data);
-}
 
 void	ft_init(fdf *data)
 {
+	ft_bzero(data, sizeof(fdf));
 	data->mlx.mlx_ptr = mlx_init();
 	if (NULL == data->mlx.mlx_ptr)
 		mlx_fail(data);
