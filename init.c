@@ -6,26 +6,33 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 11:20:26 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:43:23 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "errors.h"
 #include "fdf.h"
 
-void	mlx_fail(fdf *data)
+void	ft_init_zoom(fdf *data)
+{
+	if (data->width < 20)
+		data->zoom = 50;
+	else if (data->width < 50)
+		data->zoom = 40;
+	else if (data->width < 100)
+		data->zoom = 30;
+	else
+		data->zoom = 2;
+}
+
+static void	mlx_fail(fdf *data)
 {
 	free(data);
 	perror(ERR_MLX);
 	exit(EXIT_FAILURE);
 }
-void	ft_init_data(fdf *data)
+static void	ft_init_data(fdf *data)
 {
-	/* the zoom condition need an improvemnt !*/
-	if (data->width < 20)
-		data->zoom = 30;
-	else
-		data->zoom = 1;
 	data->view = ISO;
 	ft_centering(data);
 	data->tita = 0;

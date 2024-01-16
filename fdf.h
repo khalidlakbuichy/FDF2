@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 09:01:39 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:37:14 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,8 @@ void				free_all_exit(fdf *data, const char *str);
 void				free_all_ressources(fdf *data);
 void				free_matrix(t_point **z_matrix);
 void				ft_mlx_destroy(fdf *data);
+int					ft_ishex(const char *str);
+int					free_double_ptr(char **memory);
+void				ft_init_zoom(fdf *data);
 
 #endif

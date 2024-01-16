@@ -6,11 +6,25 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:15:36 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 12:03:19 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:34:45 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	free_double_ptr(char **memory)
+{
+	int	i;
+
+	i = 0;
+	if (NULL != memory)
+	{
+		while (NULL != memory[i])
+			free(memory[i++]);
+		free(memory);
+	}
+	return (1);
+}
 
 void	ft_mlx_destroy(fdf *data)
 {

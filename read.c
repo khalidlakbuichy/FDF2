@@ -6,29 +6,14 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 12:00:23 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:37:24 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "errors.h"
 #include "fdf.h"
 
-int	free_mem(char **memory)
-{
-	int	i;
-
-	i = 0;
-	if (NULL != memory)
-	{
-		while (NULL != memory[i])
-			free(memory[i++]);
-		free(memory);
-	}
-	/* make return void*/
-	return (1);
-}
-
-void	set_width_height(fdf *data, const char *filename)
+static void	set_width_height(fdf *data, const char *filename)
 {
 	ssize_t	fd;
 	size_t	heigth;
@@ -42,7 +27,7 @@ void	set_width_height(fdf *data, const char *filename)
 	width = 0;
 	while (NULL != splited_line[width])
 		width++;
-	free_mem(splited_line);
+	free_double_ptr(splited_line);
 	heigth = 0;
 	while (NULL != line)
 	{
@@ -55,11 +40,37 @@ void	set_width_height(fdf *data, const char *filename)
 	close(fd);
 }
 
-int	fill_matrix(t_point *z_line, char *line)
+static int	fill_matrix_color(t_point *z_line, char *splited_line)
+{
+	char	**splited_values;
+
+	if (NULL != ft_strchr(splited_line, ','))
+	{
+		splited_values = ft_split(splited_line, ',');
+		if (NULL == splited_values)
+			return (-1);
+		z_line->color = ft_atoi_hex(splited_values[1]);
+		if (!ft_isnbr(splited_values[0]) || !ft_ishex(splited_values[1]))
+		{
+			free_double_ptr(splited_values);
+			return (-1);
+		}
+	}
+	else
+	{
+		if (!ft_isnbr(splited_line))
+			return (-1);
+		z_line->color = 0xffffffff;
+		if (0 != z_line->z)
+			z_line->color = 0xffda012d;
+	}
+	return(1);
+}
+
+static int	fill_matrix(t_point *z_line, char *line)
 {
 	int		i;
 	char	**splited_line;
-	char	**splited_values;
 
 	i = 0;
 	splited_line = ft_split(line, ' ');
@@ -68,60 +79,22 @@ int	fill_matrix(t_point *z_line, char *line)
 	while (NULL != splited_line[i])
 	{
 		z_line[i].z = ft_atoi(splited_line[i]);
-		if (NULL != ft_strchr(splited_line[i], ','))
+		if (-1 == fill_matrix_color(&z_line[i], splited_line[i]))
 		{
-			splited_values = ft_split(splited_line[i], ',');
-			if (NULL == splited_values)
-			{
-				free_mem(splited_line);
-				return (-1);
-			}
-			z_line[i].color = ft_atoi_hex(splited_values[1]);
-			/* check for hex nbr and nbr */
-			if (!ft_isnbr(splited_values[0])
-				|| !ft_ishex_nbr(splited_values[1]))
-			{
-				free_mem(splited_line);
-				free_mem(splited_values);
-				return (-1);
-			}
-		}
-		else
-		{
-			z_line[i].color = 0xffffffff;
-			if (0 != z_line[i].z)
-				z_line[i].color = 0xffda012d;
-			if (!ft_isnbr(splited_line[i]))
-			{
-				free_mem(splited_line);
-				return (-1);
-			}
+			free_double_ptr(splited_line);
+			return (-1);
 		}
 		i++;
 	}
-	free_mem(splited_line);
+	free_double_ptr(splited_line);
 	return (1);
 }
 
-void	read_map(const char *filename, fdf *data)
+static void	matrix_allocation(fdf *data, ssize_t fd)
 {
-	ssize_t	fd;
 	int		i;
-	int		is_err;
 	char	*line;
 
-	fd = open(filename, O_RDONLY);
-	if (-1 == fd)
-		free_all_exit(data, ERR_OPEN);
-	set_width_height(data, filename);
-	if (0 == data->heigth)
-		free_all_exit(data, ERR_FILE);
-	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));
-	if (NULL == data->z_matrix)
-		free_all_exit(data, ERR_MEM);
-	ft_bzero(data->z_matrix, (sizeof(t_point *) * (data->heigth + 1)));
-	for (int i = 0; i < data->heigth; i++)
-		printf("matrix: %p\n", data->z_matrix[i]);
 	i = -1;
 	while (++i < data->heigth)
 	{
@@ -143,11 +116,23 @@ void	read_map(const char *filename, fdf *data)
 		i++;
 	}
 	data->z_matrix[i] = NULL;
+}
+
+void	read_map(const char *filename, fdf *data)
+{
+	ssize_t	fd;
+
+	fd = open(filename, O_RDONLY);
+	if (-1 == fd)
+		free_all_exit(data, ERR_OPEN);
+	set_width_height(data, filename);
+	ft_init_zoom(data);
+	if (0 == data->heigth)
+		free_all_exit(data, ERR_FILE);
+	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));
+	if (NULL == data->z_matrix)
+		free_all_exit(data, ERR_MEM);
+	ft_bzero(data->z_matrix, (sizeof(t_point *) * (data->heigth + 1)));
+	matrix_allocation(data, fd);
 	close(fd);
-	for (int y = 0; y < data->heigth; y++)
-	{
-		for (int x = 0; x < data->width; x++)
-			printf("%3d", data->z_matrix[y][x]);
-		puts("");
-	}
 }
