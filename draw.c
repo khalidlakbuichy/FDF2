@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 21:17:52 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:38:16 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,18 @@ void	draw_line(t_fdf *data, t_line line)
 
 	line.z = data->z_matrix[line.y][line.x].z;
 	line.z1 = data->z_matrix[line.y1][line.x1].z;
-	// printf("z: %d\t", line.z);
-	// printf("z1: %d\n", line.z1);
 	ft_zoom(data, &line);
 	ft_rotation(data, &line);
-	// printf("x: %d\t", line.x);
-	// printf("x1: %d\t", line.x1);
-	// printf("y: %d\t", line.y);
-	// printf("y1: %d\n", line.y1);
 	if (ISO == data->view)
 		ft_isometric(&line);
 	ft_transalation(data, &line);
 	dda.dx = line.x1 - line.x;
 	dda.dy = line.y1 - line.y;
-	// printf("dda.dx :%d\n", dda.dx);
-	// printf("dda.dy :%d\n", dda.dy);
 	dda.steps = ft_max(abs(dda.dx), abs(dda.dy));
 	dda.xinc = (line.x1 - line.x) / (float)dda.steps;
 	dda.yinc = (line.y1 - line.y) / (float)dda.steps;
 	dda.x = line.x;
 	dda.y = line.y;
-	// printf("steps: %d\n", dda.steps);
 	i = -1;
 	while (++i <= dda.steps)
 	{
@@ -75,15 +66,11 @@ void	draw_map(t_fdf *data)
 			if (line.x < data->width - 1)
 			{
 				line.x1++;
-				// printf("zl: %d\t", data->z_matrix[line.y][line.x].z);
-				// printf("z1l: %d\n", data->z_matrix[line.y1][line.x1].z);
 				draw_line(data, line);
 				line.x1--;
 			}
 			if (line.y < data->heigth - 1)
 			{
-				// printf("zv: %d\t", data->z_matrix[line.y][line.x].z);
-				// printf("z1v: %d\n", data->z_matrix[line.y1][line.x1].z);
 				line.y1++;
 				draw_line(data, line);
 			}

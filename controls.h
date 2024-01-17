@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.h                                             :+:      :+:    :+:   */
+/*   controls.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:55:15 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/13 13:34:23 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:50:35 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYS_H
-# define KEYS_H
+#ifndef CONTROLS_H
+# define CONTROLS_H
+
+// Some factors
+#define MAX_ZOOM_IN 100
+#define MAX_ZOOM_OUT 1
 
 // Arrow keys
 # define KEY_ARR_UP 65362

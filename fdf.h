@@ -6,7 +6,7 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 08:46:19 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 21:44:52 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:16:06 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_mlx
 
 typedef struct s_point
 {
-	unsigned int	z;
+	int				z;
 	unsigned int	color;
 }					t_point;
 
@@ -67,11 +67,11 @@ typedef enum e_projection
 
 typedef struct s_fdf
 {
-	unsigned int	width;
-	unsigned int	heigth;
+	int				width;
+	int				heigth;
 	t_point			**z_matrix;
 	t_projection	view;
-	double			zoom;
+	float				zoom;
 	int				shift_x;
 	int				shift_y;
 	float			tita;
@@ -110,7 +110,6 @@ void				shift_x_y(t_fdf *data, int key);
 void				rotation_x_y_z(t_fdf *data, int key);
 long int			ft_atoi_hex(const char *hex);
 int					deal_key(int key, t_fdf *data);
-void				upper_lower_z(t_fdf *data, int key);
 void				zoom_in_out(t_fdf *data, int key);
 void				ft_init(t_fdf *data);
 int					deal_mouse(int button, int x, int y, t_fdf *data);
@@ -129,5 +128,8 @@ void				ft_mlx_destroy(t_fdf *data);
 int					ft_ishex(const char *str);
 int					free_double_ptr(char **memory);
 void				ft_init_zoom(t_fdf *data);
+void				upper_z(t_fdf *data);
+void				lower_z(t_fdf *data);
+float				lerp(float a, float b, float t);
 
 #endif

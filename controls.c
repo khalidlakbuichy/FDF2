@@ -6,12 +6,13 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:03:28 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 21:45:30 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:13:21 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "keys.h"
+#include "controls.h"
+#define MAX_Z 500
 
 void	projection_iso_para(t_fdf *data, int key)
 {
@@ -33,15 +34,18 @@ void	projection_iso_para(t_fdf *data, int key)
 
 void	zoom_in_out(t_fdf *data, int key)
 {
-	if (KEY_PLUS == key && data->zoom <= 50)
+	int	factor;
+
+	factor = 0.5;
+	if ((KEY_PLUS == key || KEY_LP == key) && data->zoom <= MAX_ZOOM_IN)
 	{
-		data->zoom *= exp(0.02);
+		data->zoom = lerp(data->zoom, data->zoom * 1.1, factor);
 		ft_centering(data);
 	}
-	if (KEY_MINUS == key && data->zoom > 2)
+	factor = 0.5;
+	if ((KEY_MINUS == key || KEY_LM == key) && data->zoom > 2)
 	{
-		if (data->zoom > 2)
-			data->zoom *= exp(-0.02);
+		data->zoom = lerp(data->zoom, data->zoom * 1.1, factor);
 		ft_centering(data);
 	}
 }
@@ -68,32 +72,49 @@ void	rotation_x_y_z(t_fdf *data, int key)
 		data->tita += 0.25;
 }
 
-void	upper_lower_z(t_fdf *data, int key)
+void	upper_z(t_fdf *data)
 {
-	unsigned int	x;
-	unsigned int	y;
+	int	x;
+	int	y;
+	int	factor;
 
-	if (KEY_LU == key)
+	factor = 10;
+	y = -1;
+	while (++y < data->heigth)
 	{
-		y = -1;
-		while (++y < data->heigth)
+		x = -1;
+		while (++x < data->width)
 		{
-			x = -1;
-			while (++x < data->width)
-				if (data->z_matrix[y][x].z != 0 && data->z_matrix[y][x].z <= 500)
-					data->z_matrix[y][x].z *= 1.25;
+			if (0 != data->z_matrix[y][x].z && data->z_matrix[y][x].z <= MAX_Z)
+			{
+				if (0 == data->z_matrix[y][x].z + factor)
+					data->z_matrix[y][x].z += (factor + 1);
+				else
+					data->z_matrix[y][x].z += factor;
+			}
 		}
 	}
-	if (KEY_LL == key)
+}
+
+void	lower_z(t_fdf *data)
+{
+	int x;
+	int y;
+	int factor;
+
+	factor = 10;
+	y = -1;
+	while (++y < data->heigth)
 	{
-		y = -1;
-		while (++y < data->heigth)
+		x = -1;
+		while (++x < data->width)
 		{
-			x = -1;
-			while (++x < data->width)
+			if (0 != data->z_matrix[y][x].z && data->z_matrix[y][x].z >= -MAX_Z)
 			{
- 				if (data->z_matrix[y][x].z != 0)
-					data->z_matrix[y][x].z = data->z_matrix[y][x].z / 1.25 + 1;
+				if (0 == data->z_matrix[y][x].z - factor)
+					data->z_matrix[y][x].z -= (factor + 1);
+				else
+					data->z_matrix[y][x].z -= factor;
 			}
 		}
 	}

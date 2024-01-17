@@ -7,6 +7,7 @@
         "string_view": "c",
         "cmath": "c",
         "cstdlib": "c",
-        "errors.h": "c"
+        "errors.h": "c",
+        "controls.h": "c"
     }
 }
