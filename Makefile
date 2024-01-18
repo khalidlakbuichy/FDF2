@@ -5,40 +5,38 @@
 #                                                     +:+ +:+         +:+      #
 #    By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/18 10:21:40 by klakbuic          #+#    #+#              #
-#    Updated: 2024/01/18 10:22:11 by klakbuic         ###   ########.fr        #
+#    Created: 2024/01/18 10:42:54 by klakbuic          #+#    #+#              #
+#    Updated: 2024/01/18 10:42:55 by klakbuic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLAGS = -Werror -Wextra -Wall -Lminilibx_linux -Lmlx_linux -lX11 -lXext -lm
+SRC = action.c color.c draw_line.c fdf.c ft_ftoi.c map_parsing.c map_utils.c projection.c projection_utils.c \
+      reset.c utils.c help.c
+
+OBJ = ${SRC:.c=.o}
+
+CFLAGS = -Wall -Wextra -Werror
+MLX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 NAME = fdf
-SRCS = 
-OBJDIR = obj
-OBJS = 
-LIBS = minilibx_linux/libmlx.a
+CC = cc
+RM = rm -rf
+LIB = libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJDIR) $(OBJS)
-	@make -C libft/ all
-	@make -C minilibx_linux/ all
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 
+$(NAME): $(OBJ)
+    make -C libft/
+    $(CC) $(CFLAGS) $(OBJ) $(MLX) libft/$(LIB) -o fdf
 
-$(OBJDIR)/%.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+.c.o:
+    $(CC) $(CFLAGS) -c $<
 
 clean:
-	@make -C libft/ clean
-	@make -C minilibx_linux/ clean
-	rm -rf $(OBJDIR)
+    $(RM) $(OBJ)
+    make -C libft/ clean
 
 fclean: clean
-	@make -C libft/ fclean
-	@make -C minilibx_linux/ fclean
-	rm -rf $(NAME)
+    $(RM) $(NAME)
+    make -C libft/ fclean
 
 re: fclean all
