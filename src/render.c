@@ -6,11 +6,12 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:30:05 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/17 18:33:02 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:17:59 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
+#include "../inc/draw.h"
 
 void	print_menu(t_fdf *data)
 {

@@ -6,13 +6,15 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 09:42:50 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/17 18:38:16 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:19:42 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/draw.h"
+#include "../inc/fdf.h"
+#include "../inc/utils.h"
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+static void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
@@ -22,7 +24,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_line(t_fdf *data, t_line line)
+static void	draw_line(t_fdf *data, t_line line)
 {
 	t_dda	dda;
 	int		i;
@@ -54,6 +56,7 @@ void	draw_line(t_fdf *data, t_line line)
 void	draw_map(t_fdf *data)
 {
 	t_line	line;
+
 	line.y = -1;
 	while (++line.y < data->heigth)
 	{

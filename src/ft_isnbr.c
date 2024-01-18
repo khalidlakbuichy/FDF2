@@ -6,11 +6,11 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:45:33 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 13:43:06 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:09:45 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 
 static int	is_white(int c)
 {

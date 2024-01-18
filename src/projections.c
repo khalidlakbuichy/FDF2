@@ -6,11 +6,11 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 09:00:59 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/17 17:55:12 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:16:09 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 
 void	isometric(int *x, int *y, int z)
 {

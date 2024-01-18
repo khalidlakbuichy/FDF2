@@ -6,12 +6,13 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 11:01:06 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/17 18:51:44 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:16:31 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "controls.h"
-#include "fdf.h"
+#include "../inc/fdf.h"
+#include "../inc/controls.h"
+#include "../inc/draw.h"
 
 float	lerp(float a, float b, float t)
 {

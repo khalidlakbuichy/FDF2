@@ -8,6 +8,8 @@
         "cmath": "c",
         "cstdlib": "c",
         "errors.h": "c",
-        "controls.h": "c"
+        "controls.h": "c",
+        "deallocation.h": "c",
+        "utils.h": "c"
     }
 }

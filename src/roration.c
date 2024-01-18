@@ -6,11 +6,11 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 08:57:06 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 16:07:37 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:12:14 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 
 void	x_rotation(int *y, int *z, float *tita)
 {

@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.h                                         :+:      :+:    :+:   */
+/*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:55:15 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/17 18:50:35 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 09:54:12 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTROLS_H
-# define CONTROLS_H
+#ifndef KEYS_H
+# define KEYS_H
 
-// Some factors
-#define MAX_ZOOM_IN 100
-#define MAX_ZOOM_OUT 1
-
-// Arrow keys
 # define KEY_ARR_UP 65362
 # define KEY_ARR_DOWN 65364
 # define KEY_ARR_RIGHT 65363
 # define KEY_ARR_LEFT 65361
 
-// Other importatnt keys
 # define KEY_ESC 65307
 # define KEY_ENTER 65293
 # define KEY_SPACE 32
 # define KEY_PLUS 65451
 # define KEY_MINUS 65453
 
-// Function keys
 # define KEY_F1 65470
 # define KEY_F2 65471
 # define KEY_F3 65472
@@ -44,7 +37,6 @@
 # define KEY_F11 65480
 # define KEY_F12 65481
 
-// Uppercase letter keys
 # define KEY_UA 65
 # define KEY_UB 66
 # define KEY_UC 67
@@ -72,7 +64,6 @@
 # define KEY_UY 89
 # define KEY_UZ 90
 
-// Lowercase letter keys
 # define KEY_LA 97
 # define KEY_LB 98
 # define KEY_LC 99

@@ -6,12 +6,15 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:18:52 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/16 21:24:27 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:18:59 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "errors.h"
-#include "fdf.h"
+#include "../inc/deallocation.h"
+#include "../inc/errors.h"
+#include "../inc/fdf.h"
+#include "../inc/utils.h"
+#include "../inc/draw.h"
 
 static void	set_width_height(t_fdf *data, const char *filename)
 {
@@ -127,9 +130,7 @@ void	read_map(const char *filename, t_fdf *data)
 	ft_init_zoom(data);
 	ft_centering(data);
 	if (0 == data->heigth)
-	{
 		free_all_exit(data, ERR_FILE);
-	}
 	data->z_matrix = (t_point **)malloc(sizeof(t_point *) * (data->heigth + 1));
 	if (NULL == data->z_matrix)
 		free_all_exit(data, ERR_MEM);

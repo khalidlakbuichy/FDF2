@@ -6,13 +6,13 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 09:51:51 by khalid            #+#    #+#             */
-/*   Updated: 2024/01/15 18:27:59 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:09:39 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 
-int	hex_to_int(char nb, const char *hex_base)
+static int	hex_to_int(char nb, const char *hex_base)
 {
 	int	i;
 

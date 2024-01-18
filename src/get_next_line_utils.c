@@ -6,11 +6,11 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:33:27 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 16:05:39 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:02:09 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../inc/get_next_line.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

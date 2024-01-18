@@ -6,11 +6,12 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 08:55:37 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 17:42:38 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:07:41 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/draw.h"
+#include "../inc/fdf.h"
 
 void	ft_rotation(t_fdf *data, t_line *line)
 {

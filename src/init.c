@@ -6,12 +6,13 @@
 /*   By: klakbuic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:44:39 by klakbuic          #+#    #+#             */
-/*   Updated: 2024/01/16 18:29:02 by klakbuic         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:11:14 by klakbuic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "errors.h"
-#include "fdf.h"
+#include "../inc/draw.h"
+#include "../inc/errors.h"
+#include "../inc/fdf.h"
 
 void	ft_init_zoom(t_fdf *data)
 {
